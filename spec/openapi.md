@@ -1,4 +1,5 @@
-# OpenAPI仕様書
+# OpenAPI 仕様書
+
 # PersonaGo-backend
 
 ## 型定義
@@ -37,7 +38,7 @@ type WholeBoard = {
 ## API
 
 - RESTful
-- JSON形式でリクエスト・レスポンス
+- JSON 形式でリクエスト・レスポンス
 - 認証はひとまずなしで
 
 ### `GET /api/user/{id}`
@@ -56,33 +57,35 @@ type WholeBoard = {
 - 関数名: `CreateUser`
 
 <!--
-### `PUT /api/user/{id}`
-- ユーザー情報を更新
-- `name`, `personalityId`をリクエストボディに含める
-- `User`型のデータを返す
-- 名前の訂正とか
-- 関数名 `UpdateUser`
-- 実際には使わないかも？
+  ### `PUT /api/user/{id}`
 
-### `DELETE /api/user/delete/{id}`
+  - ユーザー情報を更新
+  - `name`, `personalityId`をリクエストボディに含める
+  - `User`型のデータを返す
+  - 名前の訂正とか
+  - 関数名 `UpdateUser`
+  - 実際には使わないかも？
 
-- ユーザーを削除
-- 関数名 `DeleteUser`
-- 実際には使わないかも？ -->
+  ### `DELETE /api/user/delete/{id}`
+
+  - ユーザーを削除
+  - 関数名 `DeleteUser`
+  - 実際には使わないかも？
+-->
 
 ### `PATCH /api/user/{id}/personality`
 
 - ユーザーの性格を更新
 - 全部回ったら変更
-- できなかったら400番台
-- PATCHは部分的な変更
+- できなかったら 400 番台
+- PATCH は部分的な変更
 - `personalityId`をリクエストボディに含める
 - `User`型のデータを返す
 - 一般ユーザー向け
+
 #### 関数名
+
 - `UpdatePersonality`
-
-
 
 ### `GET /api/staff/attraction/{attractionId}`
 
@@ -96,11 +99,11 @@ type WholeBoard = {
 - `UserId`をリクエストボディに含める
 - `User`型のデータを返す
 - スタッフ向け
-- スタッフのスマホからQR読み取る
+- スタッフのスマホから QR 読み取る
 
 ### `*** /api/staff/attraction/{attractionId}/*******`
 
-- アトラクション特有のAPIを実装する場合
+- アトラクション特有の API を実装する場合
 - スタッフ向け
 
 ### `GET /api/staff/trend`
