@@ -164,7 +164,7 @@ GameLobby (
   UNIQUE (game_id, user_id)
 );
 ```
-UUID
+
 ## API
 
 - RESTful
@@ -363,7 +363,7 @@ UUID
         "10": 0,
         "11": 0,
         "12": 0,
-        "13": 0,UUID
+        "13": 0,
         "14": 0,
         "15": 0,
       }
@@ -561,7 +561,7 @@ UUID
 
 ### DELETE `/api/games/lobby/{game_id}`
 - 指定したゲームの待機列を削除
-- レスポンスは特に無しUUID
+- レスポンスは特に無し
 ---
 
 ### POST `/api/games/result`
