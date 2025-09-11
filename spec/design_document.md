@@ -2,45 +2,66 @@
 
 ## TODO
 
-### 未設計のAPI
+### ~~未設計のAPI~~
 - `/api/staff/game/result/summary`の設計
+-> 設計完了
 
-### パス名や名称の改良
+### ~~パス名や名称の改良~~
 - パスに`staff`は必要?
+-> `staff`は削除。入出場管理に関しては`/api/entry`、その他アトラクションに関しては`/api/{attraction_id}/...`に統一。
 - `/api/staff/game/result/summary`は`/api/staff/game/result`でも良い?
+-> そのままにする。
 - `summary`と`trend`名称をどちらかに統一する?(`/api/staff/trend`と`/api/staff/game/result/summary`は似たような意味合い)
+-> `summary`と`trend`は`summary`に統一。
 
-### 設計中のAPIに関する疑問・検討
+### ~~設計中のAPIに関する疑問・検討~~
 - `/api/staff/game/result/summary`はプレイごとの順位を出すか、ユーザーごとの順位を出すか?
 - プレイごとの順位を出すとランキングを同一プレイヤーが独占する可能性がある
+-> 順位の際には、プレイヤーの最大スコアを代表スコアとして扱うことに決定。
 - 同率順位に対する処理
+-> 同率順位は同じ順位とし、次の順位は飛ばす(1位, 2位, 2位, 4位...)ことに決定。また、同率順位によりランキングの数が増える場合があることも許容する。
 - 性格を変えるなら、ゲームプレイ時の性格も記録する必要あり
+-> ゲームプレイ時の性格も記録することに決定。
 
-### 新機能実装の検討
+### ~~新機能実装の検討~~
 - 混雑状況取得APIの検討
+-> 保留。完成してから追加でもたぶん大丈夫。
 
-### ID(0, 1, 2...)で管理するか名称(gameなど)で管理するか
+### ~~ID(0, 1, 2...)で管理するか名称(gameなど)で管理するか~~
 - 現在アトラクションをID(0-4)で表現しているが、APIでは`game`などの分かりやすい名前に変更するべき?(Personalityテーブルを作成する必要があり、バックエンドの実装が少し増える)
 - 同様に性格IDやゲームの種類もIDから名前に変更するべき?
+-> アトラクションのみ名称で管理することに決定。APIでは名称を使い、DBではIDを使う。
 
-### 性格の変更について
+### ~~性格の変更について~~
 - 性格を変更するのがコンセプト的に合わない?
 - 性格はゲームのプレイスタイルにも関わるため、変更できないのはユーザーの選択や自由を奪うことになる?
 - 変更を許す場合、変更履歴を残すべき?
 - 最初に設定した性格はオリジナル性格として記録しておいたほうがコンセプトと自由度のバランスが取れている。
+-> オリジナル性格と現在の性格を分けて管理することに決定
 
-### 景品受取について
+### ~~景品受取について~~
 - 「すべてのアトラクションを体験しないと景品は受け取れない」というルールを設けるか?
 - ユーザーによっては景品を受け取るためにすべてのアトラクションを体験することを望まない場合もあるため、柔軟な対応が必要かも
+-> 判断は景品受取りのパートに任せる。こちらではどのアトラクションを体験したを表示するだけにする。
+
+### アトラクションID名
+各出し物のID名を確定したい。
+
+- **mbti**: 性格診断
+- **ai-portrait**: AI似顔絵
+- **games**: ゲーム
+- **battle**: サバゲー
+- **prize**: 景品受取
 
 ## 型定義
 
 ```TypeScript
 // 基本型
-type UserId = string; // UUID
+type UserId = string; // ID (10桁程度のランダムな英数字(0-9, a-zm o,lは除く)を想定)
 type UserName = string; // ユーザー名（重複可）
 type PersonalityId = number; // 性格ID
-type AttractionId = 0 | 1 | 2 | 3 | 4; // 出し物ID(性格診断, 景品も含む)
+// TODO: 名称の決定
+type AttractionId = "mbti" | "ai-portrait" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
 type GameId = 0 | 1; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
@@ -51,7 +72,8 @@ type GameScore = number; // ゲームのスコア
 type User = {
   id: UserId; // ID
   name: UserName; // ユーザー名
-  personality: PersonalityId; // 性格ID
+  original_personality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
+  current_personality: PersonalityId; // 現在の性格ID
   attraction: AttractionId[]; // 体験済みアトラクション
 };
 ```
@@ -59,15 +81,27 @@ type User = {
 
 ## SQLスキーマ
 
+### Attractions
+
+アトラクションのIDと名称の紐づけ
+
+```sql
+CREATE TABLE Attractions (
+  id SMALLINT PRIMARY KEY, -- ID DB用
+  name VARCHAR(50) NOT NULL -- アトラクションID(AttractionId) API用
+);
+```
+
 ### Users
 
 一般ユーザーを管理
 
 ```sql
 Users (
-  id UUID PRIMARY KEY, -- ユーザーID(UserId)
+  id PRIMARY KEY, -- ユーザーID(UserId)
   name VARCHAR(50) NOT NULL, -- ユーザー名(UserName)
-  personality SMALLINT NOT NULL CHECK (personality BETWEEN 0 AND 3) -- 性格ID(PersonalityId)
+  original_personality SMALLINT NOT NULL, -- オリジナル性格ID(PersonalityId)
+  current_personality SMALLINT NOT NULL , -- 現在の性格ID(PersonalityId)
 );
 ```
 
@@ -78,8 +112,9 @@ Users (
 ```sql
 Visits (
   id SERIAL PRIMARY KEY, -- 来訪ID
-  user_id UUID NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
-  attraction_id SMALLINT NOT NULL CHECK (attraction_id BETWEEN 0 AND 4), -- 出し物ID(AttractionId)
+  user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
+  user_personality SMALLINT NOT NULL, -- 来訪時の性格ID(PersonalityId)
+  attraction_id SMALLINT NOT NULL CHECK (attraction_id BETWEEN 0 AND 4), -- アトラクションID(AttractionId)
   staff_name VARCHAR(50), -- スタッフ名(StaffName)
   visited_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 来訪時刻
 );
@@ -108,7 +143,8 @@ GameResults (
   id SERIAL PRIMARY KEY, -- リザルトID
   play_id INT NOT NULL REFERENCES GamePlays(play_id), -- プレイID(GamePlayId)
   slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(GameSlot)
-  user_id UUID NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
+  user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
+  user_personality SMALLINT NOT NULL, -- プレイ時の性格ID(PersonalityId)
   score INT NOT NULL, -- スコア(GameScore)
 );
 CREATE INDEX idx_results_play ON GameResults(play_id);
@@ -123,12 +159,12 @@ CREATE INDEX idx_results_play ON GameResults(play_id);
 GameLobby (
   game_id SMALLINT NOT NULL REFERENCES Games(game_id), -- ゲームID(GameId)
   slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(GameSlot)
-  user_id UUID NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
+  user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   PRIMARY KEY (game_id, slot),
   UNIQUE (game_id, user_id)
 );
 ```
-
+UUID
 ## API
 
 - RESTful
@@ -155,13 +191,14 @@ GameLobby (
 {
   "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
   "name": "ほげほげ夫",
-  "personality": 1,
-  "attraction": [0, 1]
+  "original_personality": 1,
+  "current_personality": 2,
+  "attraction": ["games", "ai-portrait"]
 }
 ```
 ---
 
-### POST `/api/user/`
+### POST `/api/user`
 
 - ユーザーを新規作成
 - 一般ユーザー向け
@@ -182,7 +219,8 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ子",
-  "personality": 2,
+  "original_personality": 2,
+  "current_personality": 2,
   "attraction": []
 }
 ```
@@ -200,7 +238,8 @@ GameLobby (
 {
   "id": null,
   "name": "ほげほげ美",
-  "personality": null,
+  "original_personality": null,
+  "current_personality": null,
   "attraction": null
 }
 ```
@@ -210,11 +249,36 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ美",
-  "personality": 2,
+  "original_personality": 2,
+  "current_personality": 2,
   "attraction": []
 }
 ```
 ---
+
+### PATCH `/api/user/{user_id}/personality`
+- ユーザーの現在の性格情報(current_personality)を更新
+- 性格IDをリクエストボディに含める
+- `User`型のデータを返す
+- 性格は変更する機会が多いため、PATCHメソッドを実装
+
+#### リクエスト例
+```JSON
+{
+  "personality": 2
+}
+```
+
+#### レスポンス例
+```JSON
+{
+  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "name": "ほげほげ美",
+  "original_personality": 1,
+  "current_personality": 2,
+  "attraction": []
+}
+```
 
 ### DELETE `/api/user/{user_id}`
 - ユーザーを削除
@@ -234,12 +298,14 @@ GameLobby (
 {
   "history": [
     {
-      "attraction_id": 0,
+      "attraction_id": "game",
+      "personality": 1,
       "staff_name": "スタッフ太郎",
       "visited_at": "2025-08-25T12:03:51Z"
     },
     {
-      "attraction_id": 3,
+      "attraction_id": "ai-port",
+      "personality": 2,
       "staff_name": "スタッフ次郎",
       "visited_at": "2025-08-25T12:34:56Z"
     }
@@ -248,10 +314,11 @@ GameLobby (
 ```
 ---
 
-### GET `/api/staff/trend`
+### GET `/api/entry/summary`
 
 - 各アトラクションの来訪者情報を取得
 - スタッフ向け
+- 性格はオリジナル性格で集計
 
 #### レスポンス例
 ```JSON
@@ -259,38 +326,87 @@ GameLobby (
   "trends": [
     {
       "attraction": "total",
-      "visitors": 240,
+      "visitors": 113,
       "visitors_by_personality": {
-        "0": 100,
-        "1": 80,
-        "2": 60
+         "0": 5,
+        "1": 7,
+        "2": 15,
+        "3": 10,
+        "4": 8,
+        "5": 5,
+        "6": 10,
+        "7": 10,
+        "8": 5,
+        "9": 3,
+        "10": 2,
+        "11": 10,
+        "12": 15,
+        "13": 0,
+        "14": 8,
+        "15": 0
       }
     },
     {
-      "attraction": 0,
-      "visitors": 100,
+      "attraction": "mbti",
+      "visitors": 0,
       "visitors_by_personality": {
-        "0": 50,
-        "1": 30,
-        "2": 20
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "13": 0,UUID
+        "14": 0,
+        "15": 0,
       }
     },
     {
-      "attraction": 1,
-      "visitors": 80,
+      "attraction": "ai-portrait",
+      "visitors": 55,
       "visitors_by_personality": {
-        "0": 40,
-        "1": 25,
-        "2": 15
+        "0": 5,
+        "1": 7,
+        "2": 15,
+        // ... 省略 ...
       }
     },
     {
-      "attraction": 2,
-      "visitors": 60,
+      "attraction": "games",
+      "visitors": 30,
       "visitors_by_personality": {
         "0": 30,
         "1": 20,
         "2": 10
+        // ... 省略 ...
+      }
+    },
+    {
+      "attraction": "battle",
+      "visitors": 20,
+      "visitors_by_personality": {
+        "0": 10,
+        "1": 10,
+        "2": 10
+        // ... 省略 ...
+      }
+    },
+    {
+      "attraction": "prize",
+      "visitors": 8,
+      "visitors_by_personality": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+        // ... 省略 ...
       }
     }
   ]
@@ -299,7 +415,7 @@ GameLobby (
 
 ---
 
-### GET `/api/staff/attraction/{attraction_id}`
+### GET `/api/entry/attraction/{attraction_id}`
 
 - そのアトラクションの詳細情報を取得
 - スタッフ向け
@@ -309,7 +425,7 @@ GameLobby (
 - 来訪者の配列は来訪時刻(降順: 新しい順)でソートされる
 
 #### リクエスト例
-- GET `/api/staff/attraction/0?limit=10` (クエリパラメータ: `limit=10`)
+- GET `/api/entry/attraction/0?limit=10` (クエリパラメータ: `limit=10`)
 
 #### レスポンス例
 ```JSON
@@ -336,7 +452,7 @@ GameLobby (
 ```
 ---
 
-### POST `/api/staff/attraction/{attraction_id}/entry`
+### POST `/api/entry/attraction/{attraction_id}/visit`
 
 - ユーザーの体験済みのアトラクションを更新
 - スタッフ向け
@@ -362,11 +478,11 @@ GameLobby (
 ```
 ---
 
-### XXX `/api/staff/attraction/{attraction_id}/xxxxxxxxxx`
+### XXX `/api/{attraction_id}/xxxxxxxxxx`
 
 - アトラクション特有の API を実装する場合
 
-### GET `/api/staff/game/lobby/{game_id}`
+### GET `/api/games/lobby/{game_id}`
 
 - 指定したゲームの待機列情報を取得
 - レスポンスは待機列の情報を含む
@@ -397,7 +513,7 @@ GameLobby (
 ```
 ---
 
-### POST `/api/staff/game/lobby/{game_id}`
+### POST `/api/games/lobby/{game_id}`
 
 - 指定したゲームの待機列を更新
 - 1プレイ分のユーザー(複数)を一度に追加(残っている場合は上書き)
@@ -443,12 +559,12 @@ GameLobby (
 ```
 ---
 
-### DELETE `/api/staff/game/lobby/{game_id}`
+### DELETE `/api/games/lobby/{game_id}`
 - 指定したゲームの待機列を削除
-- レスポンスは特に無し
+- レスポンスは特に無しUUID
 ---
 
-### POST `/api/staff/game/result`
+### POST `/api/games/result`
 
 - ゲームシステムがゲーム結果を登録する
 - リクエストボディにゲーム結果を含める
@@ -482,7 +598,7 @@ GameLobby (
 ```
 ---
 
-### GET `/api/staff/game/result/player/{user_id}`
+### GET `/api/games/result/player/{user_id}`
 
 - 指定したユーザーのゲーム結果を取得
 - 一般ユーザー向け
@@ -520,10 +636,12 @@ GameLobby (
 ```
 ---
 
-### GET `/api/staff/game/result/summary`
+### GET `/api/games/result/summary`
 
 - ゲーム結果のサマリーを取得
-- TODO
+- 同一プレイヤーが複数回プレイした場合は、プレイヤーの最大スコアを代表スコアとして扱う(-> 同一プレイヤーがランキングを独占することを防ぐ)
+- 同率順位は同じ順位とし、次の順位は飛ばす(1位, 2位, 2位, 4位...)
+- 同率順位によりランキングの数が増える場合があることも許容する
 
 #### レスポンス例
 
@@ -606,8 +724,9 @@ GameLobby (
 
 ## その他
 ### ユーザーIDについて
-ユーザーIDは現在UUID形式とするようにしているが、ユーザーにも公開されるため、より短く覚えやすい形式にすることも検討する。
-具体的には、10桁程度の英数字(0-9, a-z)のランダムな文字列にすることを考えている。
+~~ユーザーIDは現在UUID形式とするようにしているが、ユーザーにも公開されるため、より短く覚えやすい形式にすることも検討する。~~
+~~具体的には、10桁程度の英数字(0-9, a-z)のランダムな文字列にすることを考えている。~~
+-> UUID形式は廃止し、10桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列にすることに決定。
 
 #### 実装例
 ```Go
