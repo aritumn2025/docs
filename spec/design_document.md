@@ -494,17 +494,17 @@ GameLobby (
   "lobby": {
     "1P": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "nickname": "ほげほげ子",
+      "user_name": "ほげほげ子",
       "personality": 2,
     },
     "2P": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "nickname": "ほげほげ夫",
+      "user_name": "ほげほげ夫",
       "personality": 1,
     },
     "3P": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "nickname": "ほげほげ郎",
+      "user_name": "ほげほげ郎",
       "personality": 3,
     },
     "4P": null
@@ -540,17 +540,17 @@ GameLobby (
   "lobby": {
     "1P": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "nickname": "ほげほげ子",
+      "user_name": "ほげほげ子",
       "personality": 2,
     },
     "2P": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "nickname": "ほげほげ夫",
+      "user_name": "ほげほげ夫",
       "personality": 1,
     },
     "3P": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "nickname": "ほげほげ郎",
+      "user_name": "ほげほげ郎",
       "personality": 3,
     },
     "4P": null
@@ -579,17 +579,17 @@ GameLobby (
   "results": {
     "1P": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "nickname": "ほげほげ子",
+      "user_name": "ほげほげ子",
       "score": 85
     },
     "2P": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "nickname": "ほげほげ夫",
+      "user_name": "ほげほげ夫",
       "score": 72
     },
     "3P": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "nickname": "ほげほげ郎",
+      "user_name": "ほげほげ郎",
       "score": 64
     },
     "4P": null
