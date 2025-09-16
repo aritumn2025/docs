@@ -59,7 +59,7 @@
 // 基本型
 type UserId = string; // ID (10桁程度のランダムな英数字(0-9, a-zm o,lは除く)を想定)
 type UserName = string; // ユーザー名（重複可）
-type PersonalityId = number; // 性格ID
+type PersonalityId = string; // 性格ID
 // TODO: 名称の決定
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
@@ -191,8 +191,8 @@ GameLobby (
 {
   "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
   "name": "ほげほげ夫",
-  "original_personality": 1,
-  "current_personality": 2,
+  "original_personality": "1",
+  "current_personality": "2",
   "attraction": ["games", "picture"]
 }
 ```
@@ -210,7 +210,7 @@ GameLobby (
 ```JSON
 {
   "name": "ほげほげ子",
-  "personalityId": 2
+  "personalityId": "2"
 }
 ```
 
@@ -219,8 +219,8 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ子",
-  "original_personality": 2,
-  "current_personality": 2,
+  "original_personality": "2",
+  "current_personality": "2",
   "attraction": []
 }
 ```
@@ -249,8 +249,8 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ美",
-  "original_personality": 2,
-  "current_personality": 2,
+  "original_personality": "2",
+  "current_personality": "2",
   "attraction": []
 }
 ```
@@ -265,7 +265,7 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
-  "personality": 2
+  "personality": "2"
 }
 ```
 
@@ -274,8 +274,8 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ美",
-  "original_personality": 1,
-  "current_personality": 2,
+  "original_personality": "1",
+  "current_personality": "2",
   "attraction": []
 }
 ```
@@ -299,13 +299,13 @@ GameLobby (
   "history": [
     {
       "attraction_id": "game",
-      "personality": 1,
+      "personality": "1",
       "staff_name": "スタッフ太郎",
       "visited_at": "2025-08-25T12:03:51Z"
     },
     {
       "attraction_id": "ai-port",
-      "personality": 2,
+      "personality": "2",
       "staff_name": "スタッフ次郎",
       "visited_at": "2025-08-25T12:34:56Z"
     }
@@ -435,14 +435,14 @@ GameLobby (
     {
     "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
     "name": "ほげほげ夫",
-    "personality": 1,
+    "personality": "1",
     "attraction": [0, 1, 2],
     "visited_at": "2025-08-25T12:35:51Z"
     },
     {
       "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "name": "ほげほげ子",
-      "personality": 2,
+      "personality": "2",
       "attraction": [2],
       "visited_at": "2025-08-25T12:34:56Z"
     }
@@ -472,7 +472,7 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ子",
-  "personality": 2,
+  "personality": "2",
   "attraction": []
 }
 ```
@@ -495,17 +495,17 @@ GameLobby (
     "1": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "user_name": "ほげほげ子",
-      "personality": 2,
+      "personality": "2",
     },
     "2": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
       "user_name": "ほげほげ夫",
-      "personality": 1,
+      "personality": "1",
     },
     "3": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
       "user_name": "ほげほげ郎",
-      "personality": 3,
+      "personality": "3",
     },
     "4": null
   }
@@ -541,17 +541,17 @@ GameLobby (
     "1P": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "user_name": "ほげほげ子",
-      "personality": 2,
+      "personality": "2",
     },
     "2P": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
       "user_name": "ほげほげ夫",
-      "personality": 1,
+      "personality": "1",
     },
     "3P": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
       "user_name": "ほげほげ郎",
-      "personality": 3,
+      "personality": "3",
     },
     "4P": null
   }
@@ -667,19 +667,19 @@ GameLobby (
         {
           "rank": 1,
           "user_name": "ほげほげ子",
-          "personality": 0,
+          "personality": "0",
           "score": 99
         },
         {
           "rank": 2,
           "user_name": "ほげほげ夫",
-          "personality": 0,
+          "personality": "0",
           "score": 88
         },
         {
           "rank": 2,
           "user_name": "ほげほげ郎",
-          "personality": 1,
+          "personality": "1",
           "score": 88
         }
       ],
@@ -700,19 +700,19 @@ GameLobby (
         {
           "rank": 1,
           "user_name": "ほげほげ子",
-          "personality": 0,
+          "personality": "0",
           "score": 99
         },
         {
           "rank": 2,
           "user_name": "ほげほげ夫",
-          "personality": 0,
+          "personality": "0",
           "score": 88
         },
         {
           "rank": 3,
           "user_name": "ほげほげ郎",
-          "personality": 1,
+          "personality": "1",
           "score": 87
         }
       ]
