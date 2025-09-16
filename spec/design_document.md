@@ -65,7 +65,7 @@ type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
 type GameId = 0 | 1; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
-type GameSlot = 1 | 2 | 3 | 4; // ゲームのスロット番号(1P, 2P, 3P, 4P)
+type Gameuser_name = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P, 3P, 4P)
 type GameScore = number; // ゲームのスコア
 
 // オブジェクト型(汎用的なもののみ)
@@ -142,7 +142,7 @@ GamePlays (
 GameResults (
   id SERIAL PRIMARY KEY, -- リザルトID
   play_id INT NOT NULL REFERENCES GamePlays(play_id), -- プレイID(GamePlayId)
-  slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(GameSlot)
+  user_name SMALLINT NOT NULL CHECK (user_name BETWEEN 1 AND 4), -- スロット番号(Gameuser_name)
   user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   user_personality SMALLINT NOT NULL, -- プレイ時の性格ID(PersonalityId)
   score INT NOT NULL, -- スコア(GameScore)
@@ -158,7 +158,7 @@ CREATE INDEX idx_results_play ON GameResults(play_id);
 ```sql
 GameLobby (
   game_id SMALLINT NOT NULL REFERENCES Games(game_id), -- ゲームID(GameId)
-  slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(GameSlot)
+  user_name SMALLINT NOT NULL CHECK (user_name BETWEEN 1 AND 4), -- スロット番号(GameSlot)
   user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   PRIMARY KEY (game_id, slot),
   UNIQUE (game_id, user_id)
@@ -492,22 +492,22 @@ GameLobby (
 {
   "game_id": 1,
   "lobby": {
-    "1P": {
+    "1": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "user_name": "ほげほげ子",
       "personality": 2,
     },
-    "2P": {
+    "2": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
       "user_name": "ほげほげ夫",
       "personality": 1,
     },
-    "3P": {
+    "3": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
       "user_name": "ほげほげ郎",
       "personality": 3,
     },
-    "4P": null
+    "4": null
   }
 }
 ```
@@ -615,7 +615,7 @@ GameLobby (
     {
       "game_id": 1,
       "play_id": 12,
-      "slot": 1,
+      "slot": "1",
       "score": 85,
       "ranking": 1, // ランキング
       "played_at": "2025-08-27T14:32:15Z", // プレイ開始時刻
@@ -624,7 +624,7 @@ GameLobby (
     {
       "game_id": 0,
       "play_id": 5,
-      "slot": 2,
+      "slot": "2",
       "score": 120,
       "ranking": 3,
       "played_at": "2025-08-26T11:20:00Z",
