@@ -549,22 +549,22 @@ GameLobby (
 {
   "game_id": "shooting",
   "lobby": {
-    "1P": {
+    "1": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "user_name": "ほげほげ子",
       "personality": "2",
     },
-    "2P": {
+    "2": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
       "user_name": "ほげほげ夫",
       "personality": "1",
     },
-    "3P": {
+    "3": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
       "user_name": "ほげほげ郎",
       "personality": "3",
     },
-    "4P": null
+    "4": null
   }
 }
 ```
@@ -588,22 +588,22 @@ GameLobby (
   "play_id": 12,
   "start_time": "2025-08-27T14:32:15Z",
   "results": {
-    "1P": {
+    "1": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "user_name": "ほげほげ子",
       "score": 85
     },
-    "2P": {
+    "2": {
       "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
       "user_name": "ほげほげ夫",
       "score": 72
     },
-    "3P": {
+    "3": {
       "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
       "user_name": "ほげほげ郎",
       "score": 64
     },
-    "4P": null
+    "4": null
   }
 }
 ```
