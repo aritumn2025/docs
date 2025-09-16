@@ -48,7 +48,7 @@
 各出し物のID名を確定したい。
 
 - **mbti**: 性格診断
-- **ai-portrait**: AI似顔絵
+- **picture**: AI似顔絵
 - **games**: ゲーム
 - **battle**: サバゲー
 - **prize**: 景品受取
@@ -61,7 +61,7 @@ type UserId = string; // ID (10桁程度のランダムな英数字(0-9, a-zm o,
 type UserName = string; // ユーザー名（重複可）
 type PersonalityId = number; // 性格ID
 // TODO: 名称の決定
-type AttractionId = "mbti" | "ai-portrait" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
+type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
 type GameId = 0 | 1; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
@@ -193,7 +193,7 @@ GameLobby (
   "name": "ほげほげ夫",
   "original_personality": 1,
   "current_personality": 2,
-  "attraction": ["games", "ai-portrait"]
+  "attraction": ["games", "picture"]
 }
 ```
 ---
@@ -369,7 +369,7 @@ GameLobby (
       }
     },
     {
-      "attraction": "ai-portrait",
+      "attraction": "picture",
       "visitors": 55,
       "visitors_by_personality": {
         "0": 5,
