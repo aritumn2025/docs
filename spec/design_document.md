@@ -63,7 +63,7 @@ type PersonalityId = string; // 性格ID
 // TODO: 名称の決定
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
-type GameId = 0 | 1; // ゲームの種類(タイトル)ID
+type GameId = "coin" | "shooting"; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
 type Gameuser_name = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P, 3P, 4P)
 type GameScore = number; // ゲームのスコア
@@ -120,6 +120,17 @@ Visits (
 );
 CREATE INDEX idx_visits_user ON Visits(user_id);
 CREATE INDEX idx_visits_attraction ON Visits(attraction_id);
+```
+
+### Gane
+
+ゲームの種類を管理
+
+```sql
+Games (
+  game_id SMALLINT PRIMARY KEY, -- ゲームID(GameId)
+  name VARCHAR(50) NOT NULL -- ゲームの名称
+);
 ```
 
 ### GamePlays
@@ -490,7 +501,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "game_id": 1,
+  "game_id": "shooting",
   "lobby": {
     "1": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
@@ -536,7 +547,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "game_id": 1,
+  "game_id": "shooting",
   "lobby": {
     "1P": {
       "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
@@ -573,7 +584,7 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
-  "game_id": 1,
+  "game_id": "coin",
   "play_id": 12,
   "start_time": "2025-08-27T14:32:15Z",
   "results": {
@@ -613,7 +624,7 @@ GameLobby (
   "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "results": [
     {
-      "game_id": 1,
+      "game_id": "shooting",
       "play_id": 12,
       "slot": "1",
       "score": 85,
@@ -622,7 +633,7 @@ GameLobby (
       "total_player": 120 // 総プレイヤー数
     },
     {
-      "game_id": 0,
+      "game_id": "coin",
       "play_id": 5,
       "slot": "2",
       "score": 120,
@@ -651,7 +662,7 @@ GameLobby (
   "ranking_limit": 10,
   "games": [
     {
-      "id": 0,
+      "id": "coin",
       "players": 100,
       "players_by_personality": {
         "0": 50,
@@ -667,7 +678,7 @@ GameLobby (
         {
           "rank": 1,
           "user_name": "ほげほげ子",
-          "personality": "0",
+          "personality": "01",
           "score": 99
         },
         {
@@ -684,7 +695,7 @@ GameLobby (
         }
       ],
     },{
-      "id": 1,
+      "id": "shooting",
       "players": 120,
       "players_by_personality": {
         "0": 60,
