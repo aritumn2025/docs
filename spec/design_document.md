@@ -436,14 +436,14 @@ GameLobby (
     "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
     "name": "ほげほげ夫",
     "personality": "1",
-    "attraction": [0, 1, 2],
+    "attraction": ["mbti", "picture", "games"],
     "visited_at": "2025-08-25T12:35:51Z"
     },
     {
       "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "name": "ほげほげ子",
       "personality": "2",
-      "attraction": [2],
+      "attraction": ["games"],
       "visited_at": "2025-08-25T12:34:56Z"
     }
     // あと8人分続く...
