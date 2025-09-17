@@ -336,7 +336,7 @@ GameLobby (
 {
   "trends": [
     {
-      "attraction": "total",
+      "attraction": "all",
       "visitors": 113,
       "visitorsByPersonality": {
         "0": 5,
