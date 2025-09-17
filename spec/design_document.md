@@ -65,7 +65,7 @@ type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
 type GameId = "coin" | "shooting"; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
-type Gameuser_name = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P, 3P, 4P)
+type GameSlot = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P, 3P, 4P)
 type GameScore = number; // ゲームのスコア
 
 // オブジェクト型(汎用的なもののみ)
