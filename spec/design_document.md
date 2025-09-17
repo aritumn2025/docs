@@ -8,7 +8,7 @@
 
 ### ~~パス名や名称の改良~~
 - パスに`staff`は必要?
--> `staff`は削除。入出場管理に関しては`/api/entry`、その他アトラクションに関しては`/api/{attraction_id}/...`に統一。
+-> `staff`は削除。入出場管理に関しては`/api/entry`、その他アトラクションに関しては`/api/{attractionId}/...`に統一。
 - `/api/staff/game/result/summary`は`/api/staff/game/result`でも良い?
 -> そのままにする。
 - `summary`と`trend`名称をどちらかに統一する?(`/api/staff/trend`と`/api/staff/game/result/summary`は似たような意味合い)
@@ -72,8 +72,8 @@ type GameScore = number; // ゲームのスコア
 type User = {
   id: UserId; // ID
   name: UserName; // ユーザー名
-  original_personality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
-  current_personality: PersonalityId; // 現在の性格ID
+  originalPersonality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
+  currentPersonality: PersonalityId; // 現在の性格ID
   attraction: AttractionId[]; // 体験済みアトラクション
 };
 ```
@@ -115,7 +115,7 @@ Visits (
   user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   user_personality SMALLINT NOT NULL, -- 来訪時の性格ID(PersonalityId)
   attraction_id SMALLINT NOT NULL CHECK (attraction_id BETWEEN 0 AND 4), -- アトラクションID(AttractionId)
-  staff_name VARCHAR(50), -- スタッフ名(StaffName)
+  staffName VARCHAR(50), -- スタッフ名(StaffName)
   visited_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 来訪時刻
 );
 CREATE INDEX idx_visits_user ON Visits(user_id);
@@ -202,8 +202,8 @@ GameLobby (
 {
   "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
   "name": "ほげほげ夫",
-  "original_personality": "1",
-  "current_personality": "2",
+  "originalPersonality": "1",
+  "currentPersonality": "2",
   "attraction": ["games", "picture"]
 }
 ```
@@ -230,8 +230,8 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ子",
-  "original_personality": "2",
-  "current_personality": "2",
+  "originalPersonality": "2",
+  "currentPersonality": "2",
   "attraction": []
 }
 ```
@@ -249,8 +249,8 @@ GameLobby (
 {
   "id": null,
   "name": "ほげほげ美",
-  "original_personality": null,
-  "current_personality": null,
+  "originalPersonality": null,
+  "currentPersonality": null,
   "attraction": null
 }
 ```
@@ -260,15 +260,15 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ美",
-  "original_personality": "2",
-  "current_personality": "2",
+  "originalPersonality": "2",
+  "currentPersonality": "2",
   "attraction": []
 }
 ```
 ---
 
 ### PATCH `/api/user/{user_id}/personality`
-- ユーザーの現在の性格情報(current_personality)を更新
+- ユーザーの現在の性格情報(currentPersonality)を更新
 - 性格IDをリクエストボディに含める
 - `User`型のデータを返す
 - 性格は変更する機会が多いため、PATCHメソッドを実装
@@ -285,8 +285,8 @@ GameLobby (
 {
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ美",
-  "original_personality": "1",
-  "current_personality": "2",
+  "originalPersonality": "1",
+  "currentPersonality": "2",
   "attraction": []
 }
 ```
@@ -309,16 +309,16 @@ GameLobby (
 {
   "history": [
     {
-      "attraction_id": "game",
+      "attractionId": "game",
       "personality": "1",
-      "staff_name": "スタッフ太郎",
-      "visited_at": "2025-08-25T12:03:51Z"
+      "staffName": "スタッフ太郎",
+      "visitedAt": "2025-08-25T12:03:51Z"
     },
     {
-      "attraction_id": "ai-port",
+      "attractionId": "ai-port",
       "personality": "2",
-      "staff_name": "スタッフ次郎",
-      "visited_at": "2025-08-25T12:34:56Z"
+      "staffName": "スタッフ次郎",
+      "visitedAt": "2025-08-25T12:34:56Z"
     }
   ]
 }
@@ -338,7 +338,7 @@ GameLobby (
     {
       "attraction": "total",
       "visitors": 113,
-      "visitors_by_personality": {
+      "visitorsByPersonality": {
          "0": 5,
         "1": 7,
         "2": 15,
@@ -360,7 +360,7 @@ GameLobby (
     {
       "attraction": "mbti",
       "visitors": 0,
-      "visitors_by_personality": {
+      "visitorsByPersonality": {
         "0": 0,
         "1": 0,
         "2": 0,
@@ -382,7 +382,7 @@ GameLobby (
     {
       "attraction": "picture",
       "visitors": 55,
-      "visitors_by_personality": {
+      "visitorsByPersonality": {
         "0": 5,
         "1": 7,
         "2": 15,
@@ -392,7 +392,7 @@ GameLobby (
     {
       "attraction": "games",
       "visitors": 30,
-      "visitors_by_personality": {
+      "visitorsByPersonality": {
         "0": 30,
         "1": 20,
         "2": 10
@@ -402,7 +402,7 @@ GameLobby (
     {
       "attraction": "battle",
       "visitors": 20,
-      "visitors_by_personality": {
+      "visitorsByPersonality": {
         "0": 10,
         "1": 10,
         "2": 10
@@ -412,7 +412,7 @@ GameLobby (
     {
       "attraction": "prize",
       "visitors": 8,
-      "visitors_by_personality": {
+      "visitorsByPersonality": {
         "0": 5,
         "1": 5,
         "2": 5,
@@ -448,14 +448,14 @@ GameLobby (
     "name": "ほげほげ夫",
     "personality": "1",
     "attraction": ["mbti", "picture", "games"],
-    "visited_at": "2025-08-25T12:35:51Z"
+    "visitedAt": "2025-08-25T12:35:51Z"
     },
     {
       "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "name": "ほげほげ子",
       "personality": "2",
       "attraction": ["games"],
-      "visited_at": "2025-08-25T12:34:56Z"
+      "visitedAt": "2025-08-25T12:34:56Z"
     }
     // あと8人分続く...
   ],
@@ -501,21 +501,21 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "game_id": "shooting",
+  "gameId": "shooting",
   "lobby": {
     "1": {
-      "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "user_name": "ほげほげ子",
+      "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "userName": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "user_name": "ほげほげ夫",
+      "userId": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "userName": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "user_name": "ほげほげ郎",
+      "userId": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "userName": "ほげほげ郎",
       "personality": "3",
     },
     "4": null
@@ -547,21 +547,21 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "game_id": "shooting",
+  "gameId": "shooting",
   "lobby": {
     "1": {
-      "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "user_name": "ほげほげ子",
+      "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "userName": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "user_name": "ほげほげ夫",
+      "userId": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "userName": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "user_name": "ほげほげ郎",
+      "userId": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "userName": "ほげほげ郎",
       "personality": "3",
     },
     "4": null
@@ -584,23 +584,23 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
-  "game_id": "coin",
-  "play_id": 12,
-  "start_time": "2025-08-27T14:32:15Z",
+  "gameId": "coin",
+  "playId": 12,
+  "startTime": "2025-08-27T14:32:15Z",
   "results": {
     "1": {
-      "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "user_name": "ほげほげ子",
+      "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "userName": "ほげほげ子",
       "score": 85
     },
     "2": {
-      "user_id": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "user_name": "ほげほげ夫",
+      "userId": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "userName": "ほげほげ夫",
       "score": 72
     },
     "3": {
-      "user_id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "user_name": "ほげほげ郎",
+      "userId": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "userName": "ほげほげ郎",
       "score": 64
     },
     "4": null
@@ -621,25 +621,25 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "user_id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "results": [
     {
-      "game_id": "shooting",
-      "play_id": 12,
+      "gameId": "shooting",
+      "playId": 12,
       "slot": "1",
       "score": 85,
       "ranking": 1, // ランキング
-      "played_at": "2025-08-27T14:32:15Z", // プレイ開始時刻
-      "total_player": 120 // 総プレイヤー数
+      "playedAt": "2025-08-27T14:32:15Z", // プレイ開始時刻
+      "totalPlayer": 120 // 総プレイヤー数
     },
     {
-      "game_id": "coin",
-      "play_id": 5,
+      "gameId": "coin",
+      "playId": 5,
       "slot": "2",
       "score": 120,
       "ranking": 3,
-      "played_at": "2025-08-26T11:20:00Z",
-      "total_player": 156
+      "playedAt": "2025-08-26T11:20:00Z",
+      "totalPlayer": 156
     }
     // 他のゲーム結果も続く...
   ]
@@ -658,18 +658,18 @@ GameLobby (
 
 ```JSON
 {
-  "total_players": 120,
-  "ranking_limit": 10,
+  "totalPlayers": 120,
+  "rankinLlimit": 10,
   "games": [
     {
       "id": "coin",
       "players": 100,
-      "players_by_personality": {
+      "playersByPersonality": {
         "0": 50,
         "1": 30,
         "2": 20
       },
-      "score_trend":{
+      "scoreTrend":{
         "mean": 88.5,
         "max": 105,
         "min": 90
@@ -677,19 +677,19 @@ GameLobby (
       "ranking": [
         {
           "rank": 1,
-          "user_name": "ほげほげ子",
+          "userName": "ほげほげ子",
           "personality": "01",
           "score": 99
         },
         {
           "rank": 2,
-          "user_name": "ほげほげ夫",
+          "userName": "ほげほげ夫",
           "personality": "0",
           "score": 88
         },
         {
           "rank": 2,
-          "user_name": "ほげほげ郎",
+          "userName": "ほげほげ郎",
           "personality": "1",
           "score": 88
         }
@@ -697,12 +697,12 @@ GameLobby (
     },{
       "id": "shooting",
       "players": 120,
-      "players_by_personality": {
+      "playersByPersonality": {
         "0": 60,
         "1": 40,
         "2": 20
       },
-      "score_trend":{
+      "scoreTrend":{
         "mean": 90.0,
         "max": 120,
         "min": 45
@@ -710,19 +710,19 @@ GameLobby (
       "ranking": [
         {
           "rank": 1,
-          "user_name": "ほげほげ子",
+          "userName": "ほげほげ子",
           "personality": "0",
           "score": 99
         },
         {
           "rank": 2,
-          "user_name": "ほげほげ夫",
+          "userName": "ほげほげ夫",
           "personality": "0",
           "score": 88
         },
         {
           "rank": 3,
-          "user_name": "ほげほげ郎",
+          "userName": "ほげほげ郎",
           "personality": "1",
           "score": 87
         }
