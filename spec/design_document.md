@@ -609,7 +609,7 @@ GameLobby (
 ```
 ---
 
-### GET `/api/games/result/player/{user_id}`
+### GET `/api/games/result/{user_id}`
 
 - 指定したユーザーのゲーム結果を取得
 - 一般ユーザー向け
