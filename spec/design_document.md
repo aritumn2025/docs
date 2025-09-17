@@ -339,7 +339,7 @@ GameLobby (
       "attraction": "total",
       "visitors": 113,
       "visitorsByPersonality": {
-         "0": 5,
+        "0": 5,
         "1": 7,
         "2": 15,
         "3": 10,
