@@ -337,8 +337,8 @@ GameLobby (
   "trends": [
     {
       "attraction": "all",
-      "visitors": 113,
-      "visitorsByPersonality": {
+      "visitorsCount": 113,
+      "visitorsCountByPersonality": {
         "0": 5,
         "1": 7,
         "2": 15,
@@ -359,8 +359,8 @@ GameLobby (
     },
     {
       "attraction": "mbti",
-      "visitors": 0,
-      "visitorsByPersonality": {
+      "visitorsCount": 0,
+      "visitorsCountByPersonality": {
         "0": 0,
         "1": 0,
         "2": 0,
@@ -381,8 +381,8 @@ GameLobby (
     },
     {
       "attraction": "picture",
-      "visitors": 55,
-      "visitorsByPersonality": {
+      "visitorsCount": 55,
+      "visitorsCountByPersonality": {
         "0": 5,
         "1": 7,
         "2": 15,
@@ -391,8 +391,8 @@ GameLobby (
     },
     {
       "attraction": "games",
-      "visitors": 30,
-      "visitorsByPersonality": {
+      "visitorsCount": 30,
+      "visitorsCountByPersonality": {
         "0": 30,
         "1": 20,
         "2": 10
@@ -401,8 +401,8 @@ GameLobby (
     },
     {
       "attraction": "battle",
-      "visitors": 20,
-      "visitorsByPersonality": {
+      "visitorsCount": 20,
+      "visitorsCountByPersonality": {
         "0": 10,
         "1": 10,
         "2": 10
@@ -411,8 +411,8 @@ GameLobby (
     },
     {
       "attraction": "prize",
-      "visitors": 8,
-      "visitorsByPersonality": {
+      "visitorsCount": 8,
+      "visitorsCountByPersonality": {
         "0": 5,
         "1": 5,
         "2": 5,
@@ -441,7 +441,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "totalVisitors": 56,
+  "visitorsCount": 56,
   "visitors": [
     {
     "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
@@ -630,7 +630,7 @@ GameLobby (
       "score": 85,
       "ranking": 1, // ランキング
       "playedAt": "2025-08-27T14:32:15Z", // プレイ開始時刻
-      "totalPlayer": 120 // 総プレイヤー数
+      "PlayersCount": 120 // 総プレイヤー数
     },
     {
       "gameId": "coin",
@@ -639,7 +639,7 @@ GameLobby (
       "score": 120,
       "ranking": 3,
       "playedAt": "2025-08-26T11:20:00Z",
-      "totalPlayer": 156
+      "PlayersCount": 156
     }
     // 他のゲーム結果も続く...
   ]
@@ -658,13 +658,13 @@ GameLobby (
 
 ```JSON
 {
-  "totalPlayers": 120,
+  "PlayersCount": 120,
   "rankinLlimit": 10,
   "games": [
     {
       "id": "coin",
-      "players": 100,
-      "playersByPersonality": {
+      "playersCount": 100,
+      "playersCountByPersonality": {
         "0": 50,
         "1": 30,
         "2": 20
@@ -696,13 +696,13 @@ GameLobby (
       ],
     },{
       "id": "shooting",
-      "players": 120,
-      "playersByPersonality": {
+      "playersCount": 120,
+      "playersCountByPersonality": {
         "0": 60,
         "1": 40,
         "2": 20
       },
-      "scoreTrend":{
+      "scoreTrends":{
         "mean": 90.0,
         "max": 120,
         "min": 45
