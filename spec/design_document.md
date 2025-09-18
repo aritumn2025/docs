@@ -221,7 +221,7 @@ GameLobby (
 ```JSON
 {
   "name": "ほげほげ子",
-  "personalityId": "2"
+  "personality": "2"
 }
 ```
 
@@ -309,13 +309,13 @@ GameLobby (
 {
   "history": [
     {
-      "attractionId": "game",
+      "attraction": "game",
       "personality": "1",
       "staffName": "スタッフ太郎",
       "visitedAt": "2025-08-25T12:03:51Z"
     },
     {
-      "attractionId": "ai-port",
+      "attraction": "ai-port",
       "personality": "2",
       "staffName": "スタッフ次郎",
       "visitedAt": "2025-08-25T12:34:56Z"
