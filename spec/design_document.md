@@ -575,7 +575,7 @@ GameLobby (
 - レスポンスは特に無し
 ---
 
-### POST `/api/games/result`
+### POST `/api/games/result/{game_id}`
 
 - ゲームシステムがゲーム結果を登録する
 - リクエストボディにゲーム結果を含める
@@ -584,7 +584,6 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
-  "gameId": "coin",
   "playId": 12,
   "startTime": "2025-08-27T14:32:15Z",
   "results": {
@@ -647,7 +646,7 @@ GameLobby (
 ```
 ---
 
-### GET `/api/games/result/summary`
+### GET `/api/games/result/summary/{game_id}`
 
 - ゲーム結果のサマリーを取得
 - 同一プレイヤーが複数回プレイした場合は、プレイヤーの最大スコアを代表スコアとして扱う(-> 同一プレイヤーがランキングを独占することを防ぐ)
@@ -658,75 +657,36 @@ GameLobby (
 
 ```JSON
 {
-  "PlayersCount": 120,
-  "rankinLlimit": 10,
-  "games": [
+  "gameId": "coin",
+  "playersCount": 100,
+  "playersCountByPersonality": {
+    "0": 50,
+    "1": 30,
+    "2": 20
+  },
+  "scoreTrend":{
+    "mean": 88.5,
+    "max": 105,
+    "min": 90
+  },
+  "ranking": [
     {
-      "id": "coin",
-      "playersCount": 100,
-      "playersCountByPersonality": {
-        "0": 50,
-        "1": 30,
-        "2": 20
-      },
-      "scoreTrend":{
-        "mean": 88.5,
-        "max": 105,
-        "min": 90
-      },
-      "ranking": [
-        {
-          "rank": 1,
-          "userName": "ほげほげ子",
-          "personality": "01",
-          "score": 99
-        },
-        {
-          "rank": 2,
-          "userName": "ほげほげ夫",
-          "personality": "0",
-          "score": 88
-        },
-        {
-          "rank": 2,
-          "userName": "ほげほげ郎",
-          "personality": "1",
-          "score": 88
-        }
-      ],
-    },{
-      "id": "shooting",
-      "playersCount": 120,
-      "playersCountByPersonality": {
-        "0": 60,
-        "1": 40,
-        "2": 20
-      },
-      "scoreTrends":{
-        "mean": 90.0,
-        "max": 120,
-        "min": 45
-      },
-      "ranking": [
-        {
-          "rank": 1,
-          "userName": "ほげほげ子",
-          "personality": "0",
-          "score": 99
-        },
-        {
-          "rank": 2,
-          "userName": "ほげほげ夫",
-          "personality": "0",
-          "score": 88
-        },
-        {
-          "rank": 3,
-          "userName": "ほげほげ郎",
-          "personality": "1",
-          "score": 87
-        }
-      ]
+      "rank": 1,
+      "userName": "ほげほげ子",
+      "personality": "01",
+      "score": 99
+    },
+    {
+      "rank": 2,
+      "userName": "ほげほげ夫",
+      "personality": "0",
+      "score": 88
+    },
+    {
+      "rank": 2,
+      "userName": "ほげほげ郎",
+      "personality": "1",
+      "score": 88
     }
   ]
 }
