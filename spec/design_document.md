@@ -441,7 +441,7 @@ GameLobby (
 - 来訪者の配列は来訪時刻(降順: 新しい順)でソートされる
 
 #### リクエスト例
-- GET `/api/entry/attraction/0?limit=10` (クエリパラメータ: `limit=10`)
+- GET `/api/entry/attraction/games?limit=10` (クエリパラメータ: `limit=10`)
 
 #### レスポンス例
 ```JSON
