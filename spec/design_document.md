@@ -69,6 +69,7 @@ type GameSlot = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P,
 type GameScore = number; // ゲームのスコア
 
 // オブジェクト型(汎用的なもののみ)
+// ユーザー情報
 type User = {
   id: UserId; // ID
   name: UserName; // ユーザー名
@@ -76,6 +77,10 @@ type User = {
   currentPersonality: PersonalityId; // 現在の性格ID
   attraction: AttractionId[]; // 体験済みアトラクション
 };
+
+// ゲーム待機室情報
+type Lobby = Record<GameSlot, { id: UserId; name: UserName; personality: PersonalityId } | null>;
+
 ```
 `StaffName`について: スタッフ名は人間が識別するためのもので、システム内で一意である必要はない。
 
@@ -504,18 +509,18 @@ GameLobby (
   "gameId": "shooting",
   "lobby": {
     "1": {
-      "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "userName": "ほげほげ子",
+      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "name": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "userId": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "userName": "ほげほげ夫",
+      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "name": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "userId": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "userName": "ほげほげ郎",
+      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "name": "ほげほげ郎",
       "personality": "3",
     },
     "4": null
@@ -535,12 +540,12 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
-  "lobby": [
-    "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-    "7ff08778-4ffa-4752-bb92-561db98042dd",
-    "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-    null
-  ]
+  "lobby": {
+    "1": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+    "2": "7ff08778-4ffa-4752-bb92-561db98042dd",
+    "3": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+    "4": null
+  }
 }
 ```
 
@@ -550,18 +555,18 @@ GameLobby (
   "gameId": "shooting",
   "lobby": {
     "1": {
-      "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "userName": "ほげほげ子",
+      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "name": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "userId": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "userName": "ほげほげ夫",
+      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "name": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "userId": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "userName": "ほげほげ郎",
+      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "name": "ほげほげ郎",
       "personality": "3",
     },
     "4": null
@@ -588,18 +593,18 @@ GameLobby (
   "startTime": "2025-08-27T14:32:15Z",
   "results": {
     "1": {
-      "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-      "userName": "ほげほげ子",
+      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "name": "ほげほげ子",
       "score": 85
     },
     "2": {
-      "userId": "7ff08778-4ffa-4752-bb92-561db98042dd",
-      "userName": "ほげほげ夫",
+      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "name": "ほげほげ夫",
       "score": 72
     },
     "3": {
-      "userId": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
-      "userName": "ほげほげ郎",
+      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "name": "ほげほげ郎",
       "score": 64
     },
     "4": null
