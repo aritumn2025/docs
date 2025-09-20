@@ -120,7 +120,7 @@ Visits (
   user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   user_personality SMALLINT NOT NULL, -- 来訪時の性格ID(PersonalityId)
   attraction_id SMALLINT NOT NULL CHECK (attraction_id BETWEEN 0 AND 4), -- アトラクションID(AttractionId)
-  staffName VARCHAR(50), -- スタッフ名(StaffName)
+  staff VARCHAR(50), -- スタッフ名(StaffName)
   visited_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 来訪時刻
 );
 CREATE INDEX idx_visits_user ON Visits(user_id);
@@ -316,13 +316,13 @@ GameLobby (
     {
       "attraction": "game",
       "personality": "1",
-      "staffName": "スタッフ太郎",
+      "staff": "スタッフ太郎",
       "visitedAt": "2025-08-25T12:03:51Z"
     },
     {
       "attraction": "ai-port",
       "personality": "2",
-      "staffName": "スタッフ次郎",
+      "staff": "スタッフ次郎",
       "visitedAt": "2025-08-25T12:34:56Z"
     }
   ]
@@ -479,7 +479,7 @@ GameLobby (
 ```JSON
 {
   "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-  "staffName": "スタッフ太郎"
+  "staff": "スタッフ太郎"
 }
 ```
 
