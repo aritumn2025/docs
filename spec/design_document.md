@@ -312,6 +312,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
+  "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "history": [
     {
       "attraction": "game",
@@ -438,6 +439,8 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
+  "attraction": "games",
+  "limit": 10,
   "visitorsCount": 56,
   "visitors": [
     {
