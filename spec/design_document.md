@@ -618,19 +618,19 @@ GameLobby (
   "ranking": [
     {
       "rank": 1,
-      "userName": "ほげほげ子",
+      "name": "ほげほげ子",
       "personality": "01",
       "score": 99
     },
     {
       "rank": 2,
-      "userName": "ほげほげ夫",
+      "name": "ほげほげ夫",
       "personality": "0",
       "score": 88
     },
     {
       "rank": 2,
-      "userName": "ほげほげ郎",
+      "name": "ほげほげ郎",
       "personality": "1",
       "score": 88
     }
