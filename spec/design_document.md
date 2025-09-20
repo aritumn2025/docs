@@ -75,7 +75,7 @@ type User = {
   name: UserName; // ユーザー名
   originalPersonality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
   currentPersonality: PersonalityId; // 現在の性格ID
-  attraction: AttractionId[]; // 体験済みアトラクション
+  attractions: AttractionId[]; // 体験済みアトラクション
 };
 
 // ゲーム待機室情報
@@ -209,7 +209,7 @@ GameLobby (
   "name": "ほげほげ夫",
   "originalPersonality": "1",
   "currentPersonality": "2",
-  "attraction": ["games", "picture"]
+  "attractions": ["games", "picture"]
 }
 ```
 ---
@@ -237,7 +237,7 @@ GameLobby (
   "name": "ほげほげ子",
   "originalPersonality": "2",
   "currentPersonality": "2",
-  "attraction": []
+  "attractions": []
 }
 ```
 ---
@@ -256,7 +256,7 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": null,
   "currentPersonality": null,
-  "attraction": null
+  "attractions": null
 }
 ```
 
@@ -267,7 +267,7 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": "2",
   "currentPersonality": "2",
-  "attraction": []
+  "attractions": []
 }
 ```
 ---
@@ -292,7 +292,7 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": "1",
   "currentPersonality": "2",
-  "attraction": []
+  "attractions": []
 }
 ```
 
@@ -447,14 +447,14 @@ GameLobby (
     "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
     "name": "ほげほげ夫",
     "personality": "1",
-    "attraction": ["mbti", "picture", "games"],
+    "attractions": ["mbti", "picture", "games"],
     "visitedAt": "2025-08-25T12:35:51Z"
     },
     {
       "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
       "name": "ほげほげ子",
       "personality": "2",
-      "attraction": ["games"],
+      "attractions": ["games"],
       "visitedAt": "2025-08-25T12:34:56Z"
     }
     // あと8人分続く...
@@ -484,7 +484,7 @@ GameLobby (
   "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
   "name": "ほげほげ子",
   "personality": "2",
-  "attraction": []
+  "attractions": []
 }
 ```
 ---
