@@ -339,93 +339,85 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "trends": [
-    {
-      "attraction": "all",
-      "visitorsCount": 113,
-      "visitorsCountByPersonality": {
-        "0": 5,
-        "1": 7,
-        "2": 15,
-        "3": 10,
-        "4": 8,
-        "5": 5,
-        "6": 10,
-        "7": 10,
-        "8": 5,
-        "9": 3,
-        "10": 2,
-        "11": 10,
-        "12": 15,
-        "13": 0,
-        "14": 8,
-        "15": 0
-      }
-    },
-    {
-      "attraction": "mbti",
-      "visitorsCount": 0,
-      "visitorsCountByPersonality": {
-        "0": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
-        "7": 0,
-        "8": 0,
-        "9": 0,
-        "10": 0,
-        "11": 0,
-        "12": 0,
-        "13": 0,
-        "14": 0,
-        "15": 0,
-      }
-    },
-    {
-      "attraction": "picture",
+  "all": {
+    "visitorsCount": 113,
+    "visitorsCountByPersonality": {
+      "0": 5,
+      "1": 7,
+      "2": 15,
+      "3": 10,
+      "4": 8,
+      "5": 5,
+      "6": 10,
+      "7": 10,
+      "8": 5,
+      "9": 3,
+      "10": 2,
+      "11": 10,
+      "12": 15,
+      "13": 0,
+      "14": 8,
+      "15": 0
+    }
+  },
+  "mbti": {
+    "visitorsCount": 0,
+    "visitorsCountByPersonality": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+    }
+  },
+  "picture": {
       "visitorsCount": 55,
       "visitorsCountByPersonality": {
         "0": 5,
         "1": 7,
         "2": 15,
         // ... 省略 ...
-      }
-    },
-    {
-      "attraction": "games",
-      "visitorsCount": 30,
-      "visitorsCountByPersonality": {
-        "0": 30,
-        "1": 20,
-        "2": 10
-        // ... 省略 ...
-      }
-    },
-    {
-      "attraction": "battle",
-      "visitorsCount": 20,
-      "visitorsCountByPersonality": {
-        "0": 10,
-        "1": 10,
-        "2": 10
-        // ... 省略 ...
-      }
-    },
-    {
-      "attraction": "prize",
-      "visitorsCount": 8,
-      "visitorsCountByPersonality": {
-        "0": 5,
-        "1": 5,
-        "2": 5,
-        "3": 5
-        // ... 省略 ...
-      }
     }
-  ]
+  },
+  "games": {
+    "visitorsCount": 30,
+    "visitorsCountByPersonality": {
+      "0": 30,
+      "1": 20,
+      "2": 10
+      // ... 省略 ...
+    }
+  },
+  "battle": {
+    "visitorsCount": 20,
+    "visitorsCountByPersonality": {
+      "0": 10,
+      "1": 10,
+      "2": 10
+      // ... 省略 ...
+    }
+  },
+  "prize": {
+    "visitorsCount": 8,
+    "visitorsCountByPersonality": {
+      "0": 5,
+      "1": 5,
+      "2": 5,
+      "3": 5
+      // ... 省略 ...
+    }
+  }
 }
 ```
 
