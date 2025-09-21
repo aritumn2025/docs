@@ -4,7 +4,7 @@
 
 ```TypeScript
 // 基本型
-type UserId = string; // ID (10桁程度のランダムな英数字(0-9, a-zm o,lは除く)を想定)
+type UserId = string; // ID (8桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列を2ブロック、ハイフンで区切った形式)
 type UserName = string; // ユーザー名（重複可）
 type PersonalityId = string; // 性格ID
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
@@ -151,7 +151,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+  "id": "tujy-q055",
   "name": "ほげほげ夫",
   "originalPersonality": "1",
   "currentPersonality": "2",
@@ -179,7 +179,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "id": "1tc5-4kh5",
   "name": "ほげほげ子",
   "originalPersonality": "2",
   "currentPersonality": "2",
@@ -209,7 +209,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "id": "1tc5-4kh5",
   "name": "ほげほげ美",
   "originalPersonality": "2",
   "currentPersonality": "2",
@@ -234,7 +234,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "id": "1tc5-4kh5",
   "name": "ほげほげ美",
   "originalPersonality": "1",
   "currentPersonality": "2",
@@ -250,7 +250,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "id": "1tc5-4kh5",
   "name": "ほげほげ美",
   "originalPersonality": "1",
   "currentPersonality": "2",
@@ -269,7 +269,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "userId": "1tc5-4kh5",
   "history": [
     {
       "attraction": "game",
@@ -401,14 +401,14 @@ GameLobby (
   "visitorsCount": 56,
   "visitors": [
     {
-    "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+    "id": "tujy-q055",
     "name": "ほげほげ夫",
     "personality": "1",
     "attractions": ["mbti", "picture", "games"],
     "visitedAt": "2025-08-25T12:35:51Z"
     },
     {
-      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "id": "1tc5-4kh5",
       "name": "ほげほげ子",
       "personality": "2",
       "attractions": ["games"],
@@ -430,7 +430,7 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
-  "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "userId": "1tc5-4kh5",
   "staff": "スタッフ太郎"
 }
 ```
@@ -438,7 +438,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "id": "1tc5-4kh5",
   "name": "ほげほげ子",
   "personality": "2",
   "attractions": []
@@ -461,17 +461,17 @@ GameLobby (
   "gameId": "shooting",
   "lobby": {
     "1": {
-      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "id": "1tc5-4kh5",
       "name": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "id": "tujy-q055",
       "name": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "id": "dryf-fbhu",
       "name": "ほげほげ郎",
       "personality": "3",
     },
@@ -493,9 +493,9 @@ GameLobby (
 ```JSON
 {
   "lobby": {
-    "1": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
-    "2": "7ff08778-4ffa-4752-bb92-561db98042dd",
-    "3": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+    "1": "1tc5-4kh5",
+    "2": "tujy-q055",
+    "3": "dryf-fbhu",
     "4": null
   }
 }
@@ -507,17 +507,17 @@ GameLobby (
   "gameId": "shooting",
   "lobby": {
     "1": {
-      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "id": "1tc5-4kh5",
       "name": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "id": "tujy-q055",
       "name": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "id": "dryf-fbhu",
       "name": "ほげほげ郎",
       "personality": "3",
     },
@@ -537,17 +537,17 @@ GameLobby (
   "gameId": "shooting",
   "lobby": {
     "1": {
-      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "id": "1tc5-4kh5",
       "name": "ほげほげ子",
       "personality": "2",
     },
     "2": {
-      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "id": "tujy-q055",
       "name": "ほげほげ夫",
       "personality": "1",
     },
     "3": {
-      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "id": "dryf-fbhu",
       "name": "ほげほげ郎",
       "personality": "3",
     },
@@ -570,17 +570,17 @@ GameLobby (
   "startTime": "2025-08-27T14:32:15Z",
   "results": {
     "1": {
-      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "id": "1tc5-4kh5",
       "name": "ほげほげ子",
       "score": 85
     },
     "2": {
-      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "id": "tujy-q055",
       "name": "ほげほげ夫",
       "score": 72
     },
     "3": {
-      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "id": "dryf-fbhu",
       "name": "ほげほげ郎",
       "score": 64
     },
@@ -602,7 +602,7 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "userId": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "userId": "1tc5-4kh5",
   "results": [
     {
       "gameId": "shooting",
@@ -677,9 +677,7 @@ GameLobby (
 
 ## その他
 ### ユーザーIDについて
-~~ユーザーIDは現在UUID形式とするようにしているが、ユーザーにも公開されるため、より短く覚えやすい形式にすることも検討する。~~
-~~具体的には、10桁程度の英数字(0-9, a-z)のランダムな文字列にすることを考えている。~~
--> UUID形式は廃止し、10桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列にすることに決定。
+8桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列を2ブロック、ハイフンで区切った形式とする (例: `abcd-efgh`)
 
 #### 実装例
 ```Go
@@ -687,26 +685,39 @@ package main
 
 import (
     "crypto/rand"
+    "fmt"
     "math/big"
+    "strings"
 )
 
 // 小文字英字 + 数字, ただし紛らわしい文字(o, l)は除外
 const charset = "abcdefghijkmnpqrstuvwxyz0123456789"
 
-func GenerateID(length int) (string, error) {
-    result := make([]byte, length)
-    for i := 0; i < length; i++ {
-        n, err := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
-        if err != nil {
-            return "", err
+// Generate は可変長引数で各ブロックの長さを受け取り、ハイフン区切りのIDを生成する
+func Generate(lengths ...int) (string, error) {
+    parts := make([]string, len(lengths))
+    for i, length := range lengths {
+        b := make([]byte, length)
+        for j := 0; j < length; j++ {
+            n, err := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
+            if err != nil {
+                return "", err
+            }
+            b[j] = charset[n.Int64()]
         }
-        result[i] = charset[n.Int64()]
+        parts[i] = string(b)
     }
-    return string(result), nil
+    return strings.Join(parts, "-"), nil
 }
 
-// 呼び出し
-id, _ := GenerateID(12)
+func main() {
+    id, err := Generate(4, 4, 8) // => xxxx-xxxx-xxxxxxxx
+    id, err := Generate(4, 4)    // => xxxx-xxxx (今回の仕様)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(id)
+}
 
 ```
 
