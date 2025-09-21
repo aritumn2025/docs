@@ -244,8 +244,19 @@ GameLobby (
 
 ### DELETE `/api/user/{user_id}`
 - ユーザーを削除
-- レスポンスは特に無し
+- `User`型のデータを返す
 - 関数名 `DeleteUser`
+
+#### レスポンス例
+```JSON
+{
+  "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+  "name": "ほげほげ美",
+  "originalPersonality": "1",
+  "currentPersonality": "2",
+  "attractions": []
+}
+```
 ---
 
 ### GET `/api/user/{user_id}/history`
@@ -518,7 +529,32 @@ GameLobby (
 
 ### DELETE `/api/games/lobby/{game_id}`
 - 指定したゲームの待機列を削除
-- レスポンスは特に無し
+- レスポンスには削除対象の待機列情報を含める
+
+#### レスポンス例
+```JSON
+{
+  "gameId": "shooting",
+  "lobby": {
+    "1": {
+      "id": "69a6af40-4795-4879-a8d6-d1b660c5f6bd",
+      "name": "ほげほげ子",
+      "personality": "2",
+    },
+    "2": {
+      "id": "7ff08778-4ffa-4752-bb92-561db98042dd",
+      "name": "ほげほげ夫",
+      "personality": "1",
+    },
+    "3": {
+      "id": "708325d6-77dd-4a38-b71c-c6ed04481a9c",
+      "name": "ほげほげ郎",
+      "personality": "3",
+    },
+    "4": null
+  }
+}
+```
 ---
 
 ### POST `/api/games/result/{game_id}`
