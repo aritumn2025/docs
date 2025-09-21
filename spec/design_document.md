@@ -4,7 +4,7 @@
 
 ```TypeScript
 // 基本型
-type UserId = string; // ID (8桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列を2ブロック、ハイフンで区切った形式)
+type UserId = string; // ID (8桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列を2ブロック、ハイフンで区切った形式 xxxx-xxxx)
 type UserName = string; // ユーザー名（重複可）
 type PersonalityId = string; // 性格ID
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
@@ -404,14 +404,12 @@ GameLobby (
     "id": "tujy-q055",
     "name": "ほげほげ夫",
     "personality": "1",
-    "attractions": ["mbti", "picture", "games"],
     "visitedAt": "2025-08-25T12:35:51Z"
     },
     {
       "id": "1tc5-4kh5",
       "name": "ほげほげ子",
       "personality": "2",
-      "attractions": ["games"],
       "visitedAt": "2025-08-25T12:34:56Z"
     }
     // あと8人分続く...
@@ -438,10 +436,14 @@ GameLobby (
 #### レスポンス例
 ```JSON
 {
-  "id": "1tc5-4kh5",
-  "name": "ほげほげ子",
-  "personality": "2",
-  "attractions": []
+  "attraction": "games",
+  "staff": "スタッフ太郎",
+  "user": {
+    "id": "1tc5-4kh5",
+    "name": "ほげほげ子",
+    "personality": "2",
+    "attractions": []
+  }
 }
 ```
 ---
@@ -492,6 +494,7 @@ GameLobby (
 #### リクエスト例
 ```JSON
 {
+  "gameId": "shooting",
   "lobby": {
     "1": "1tc5-4kh5",
     "2": "tujy-q055",
@@ -561,12 +564,11 @@ GameLobby (
 
 - ゲームシステムがゲーム結果を登録する
 - リクエストボディにゲーム結果を含める
-- レスポンスは特に無し
+- レスポンスには登録したゲームIDとプレイIDを含める
 
 #### リクエスト例
 ```JSON
 {
-  "playId": 12,
   "startTime": "2025-08-27T14:32:15Z",
   "results": {
     "1": {
@@ -588,9 +590,17 @@ GameLobby (
   }
 }
 ```
+
+### レスポンス例
+```JSON
+{
+  "gameId": "shooting",
+  "playId": 12
+}
+```
 ---
 
-### GET `/api/games/result/{user_id}`
+### GET `/api/games/result/player/{user_id}`
 
 - 指定したユーザーのゲーム結果を取得
 - 一般ユーザー向け
@@ -628,7 +638,7 @@ GameLobby (
 ```
 ---
 
-### GET `/api/games/result/summary/{game_id}`
+### GET `/api/games/result/summary/{game_id}?limit={limit}`
 
 - ゲーム結果のサマリーを取得
 - 同一プレイヤーが複数回プレイした場合は、プレイヤーの最大スコアを代表スコアとして扱う(-> 同一プレイヤーがランキングを独占することを防ぐ)
@@ -640,6 +650,7 @@ GameLobby (
 ```JSON
 {
   "gameId": "coin",
+  "limit": 10,
   "playersCount": 100,
   "playersCountByPersonality": {
     "0": 50,
