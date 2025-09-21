@@ -655,7 +655,7 @@ GameLobby (
     {
       "rank": 1,
       "name": "ほげほげ子",
-      "personality": "01",
+      "personality": "1",
       "score": 99
     },
     {
