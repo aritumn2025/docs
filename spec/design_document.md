@@ -28,6 +28,7 @@ type User = {
 type Lobby = Record<GameSlot, { id: UserId; name: UserName; personality: PersonalityId } | null>;
 
 ```
+
 `StaffName`について: スタッフ名は人間が識別するためのもので、システム内で一意である必要はない。
 
 ## SQLスキーマ
@@ -111,6 +112,7 @@ GameResults (
 );
 CREATE INDEX idx_results_play ON GameResults(play_id);
 ```
+
 - ランキングの情報は削除。数百-数千件程度の規模ならSELECT時に`RANK()`で対応可能
 
 ### GameLobby
@@ -139,6 +141,7 @@ GameLobby (
   - 400 Bad Request: リクエストが不正
   - 404 Not Found: リソースが見つからない
   - 500 Internal Server Error: サーバーエラー
+
 ---
 
 ### GET `/api/user/{user_id}`
@@ -149,6 +152,7 @@ GameLobby (
 - 関数名: `GetUser`
 
 #### レスポンス例
+
 ```JSON
 {
   "id": "tujy-q055",
@@ -158,6 +162,7 @@ GameLobby (
   "attractions": ["games", "picture"]
 }
 ```
+
 ---
 
 ### POST `/api/user`
@@ -169,6 +174,7 @@ GameLobby (
 - 関数名: `CreateUser`
 
 #### リクエスト例
+
 ```JSON
 {
   "name": "ほげほげ子",
@@ -177,6 +183,7 @@ GameLobby (
 ```
 
 #### レスポンス例
+
 ```JSON
 {
   "id": "1tc5-4kh5",
@@ -186,7 +193,9 @@ GameLobby (
   "attractions": []
 }
 ```
+
 ---
+
 ### UPDATE `/api/user/{user_id}`
 
 - 名前の訂正など、ユーザー情報を更新
@@ -196,6 +205,7 @@ GameLobby (
 - 関数名 `UpdateUser`
 
 #### リクエスト例
+
 ```JSON
 {
   "id": null,
@@ -207,6 +217,7 @@ GameLobby (
 ```
 
 #### レスポンス例
+
 ```JSON
 {
   "id": "1tc5-4kh5",
@@ -216,15 +227,18 @@ GameLobby (
   "attractions": []
 }
 ```
+
 ---
 
 ### PATCH `/api/user/{user_id}/personality`
+
 - ユーザーの現在の性格情報(currentPersonality)を更新
 - 性格IDをリクエストボディに含める
 - `User`型のデータを返す
 - 性格は変更する機会が多いため、PATCHメソッドを実装
 
 #### リクエスト例
+
 ```JSON
 {
   "personality": "2"
@@ -232,6 +246,7 @@ GameLobby (
 ```
 
 #### レスポンス例
+
 ```JSON
 {
   "id": "1tc5-4kh5",
@@ -243,11 +258,13 @@ GameLobby (
 ```
 
 ### DELETE `/api/user/{user_id}`
+
 - ユーザーを削除
 - `User`型のデータを返す
 - 関数名 `DeleteUser`
 
 #### レスポンス例
+
 ```JSON
 {
   "id": "1tc5-4kh5",
@@ -257,6 +274,7 @@ GameLobby (
   "attractions": []
 }
 ```
+
 ---
 
 ### GET `/api/user/{user_id}/history`
@@ -267,6 +285,7 @@ GameLobby (
 - 来訪情報にはアトラクションID, スタッフ名, 来訪時刻が含まれる
 
 #### レスポンス例
+
 ```JSON
 {
   "userId": "1tc5-4kh5",
@@ -286,6 +305,7 @@ GameLobby (
   ]
 }
 ```
+
 ---
 
 ### GET `/api/entry/summary`
@@ -295,6 +315,7 @@ GameLobby (
 - 性格はオリジナル性格で集計
 
 #### レスポンス例
+
 ```JSON
 {
   "all": {
@@ -391,9 +412,11 @@ GameLobby (
 - 来訪者の配列は来訪時刻(降順: 新しい順)でソートされる
 
 #### リクエスト例
+
 - GET `/api/entry/attraction/games?limit=10` (クエリパラメータ: `limit=10`)
 
 #### レスポンス例
+
 ```JSON
 {
   "attraction": "games",
@@ -416,6 +439,7 @@ GameLobby (
   ],
 }
 ```
+
 ---
 
 ### POST `/api/entry/attraction/{attraction_id}/visit`
@@ -426,6 +450,7 @@ GameLobby (
 - `User`型のデータを返す
 
 #### リクエスト例
+
 ```JSON
 {
   "userId": "1tc5-4kh5",
@@ -434,6 +459,7 @@ GameLobby (
 ```
 
 #### レスポンス例
+
 ```JSON
 {
   "attraction": "games",
@@ -446,6 +472,7 @@ GameLobby (
   }
 }
 ```
+
 ---
 
 ### XXX `/api/{attraction_id}/xxxxxxxxxx`
@@ -458,6 +485,7 @@ GameLobby (
 - レスポンスは待機列の情報を含む
 
 #### レスポンス例
+
 ```JSON
 {
   "gameId": "shooting",
@@ -481,6 +509,7 @@ GameLobby (
   }
 }
 ```
+
 ---
 
 ### POST `/api/games/lobby/{game_id}`
@@ -492,6 +521,7 @@ GameLobby (
 - レスポンスには更新後の待機列情報を含める
 
 #### リクエスト例
+
 ```JSON
 {
   "gameId": "shooting",
@@ -505,6 +535,7 @@ GameLobby (
 ```
 
 #### レスポンス例
+
 ```JSON
 {
   "gameId": "shooting",
@@ -528,13 +559,16 @@ GameLobby (
   }
 }
 ```
+
 ---
 
 ### DELETE `/api/games/lobby/{game_id}`
+
 - 指定したゲームの待機列を削除
 - レスポンスには削除対象の待機列情報を含める
 
 #### レスポンス例
+
 ```JSON
 {
   "gameId": "shooting",
@@ -558,6 +592,7 @@ GameLobby (
   }
 }
 ```
+
 ---
 
 ### POST `/api/games/result/{game_id}`
@@ -567,6 +602,7 @@ GameLobby (
 - レスポンスには登録したゲームIDとプレイIDを含める
 
 #### リクエスト例
+
 ```JSON
 {
   "startTime": "2025-08-27T14:32:15Z",
@@ -592,12 +628,14 @@ GameLobby (
 ```
 
 ### レスポンス例
+
 ```JSON
 {
   "gameId": "shooting",
   "playId": 12
 }
 ```
+
 ---
 
 ### GET `/api/games/result/player/{user_id}`
@@ -610,6 +648,7 @@ GameLobby (
 - 総プレイヤー数はそのゲームタイトル内での総プレイヤー数
 
 #### レスポンス例
+
 ```JSON
 {
   "userId": "1tc5-4kh5",
@@ -636,6 +675,7 @@ GameLobby (
   ]
 }
 ```
+
 ---
 
 ### GET `/api/games/result/summary/{game_id}?limit={limit}`
@@ -684,13 +724,17 @@ GameLobby (
   ]
 }
 ```
+
 ---
 
 ## その他
+
 ### ユーザーIDについて
+
 8桁のランダムな英数字(0-9, a-z, o,lは除く)の文字列を2ブロック、ハイフンで区切った形式とする (例: `abcd-efgh`)
 
 #### 実装例
+
 ```Go
 package main
 
@@ -733,6 +777,7 @@ func main() {
 ```
 
 #### 衝突リスクについて
+
 - IDの長さ：$L$
 - 可能な組み合わせ数：$N = 34^L$ (小文字英字 + 数字 - "ol" = 34文字)
 - 生成する ID 数：$k$（数百〜数千程度）
