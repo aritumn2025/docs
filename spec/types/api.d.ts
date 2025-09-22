@@ -29,7 +29,7 @@ type PostUserRequest = {
 type PostUserResponse = User;
 
 // UPDATE /api/user/{user_id}
-type UpdateUserRequest = Nullable<User>;
+type UpdateUserRequest = Nullable<Omit<User, "attractions">>;
 
 type UpdateUserResponse = User;
 
