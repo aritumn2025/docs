@@ -31,6 +31,14 @@ type Lobby = Record<
   { id: UserId; name: UserName; personality: PersonalityId } | null
 >;
 
+// 入場履歴情報
+type History = {
+  attraction: AttractionId;
+  personality: PersonalityId;
+  staff: StaffName;
+  visitedAt: DateTime;
+};
+
 export type {
   UserId,
   UserName,
@@ -44,4 +52,5 @@ export type {
   GameScore,
   User,
   Lobby,
+  History,
 };
