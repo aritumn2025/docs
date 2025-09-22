@@ -9,6 +9,8 @@ type UserName = string; // ユーザー名（重複可）
 type PersonalityId = string; // 性格ID
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
+type DateTime = string; // ISO 8601 拡張形式 (YYYY-MM-DDTHH:mm:ss.sssZ)
+
 type GameId = "coin" | "shooting"; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
 type GameSlot = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P, 3P, 4P)
@@ -21,11 +23,19 @@ type User = {
   name: UserName; // ユーザー名
   originalPersonality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
   currentPersonality: PersonalityId; // 現在の性格ID
-  attractions: AttractionId[]; // 体験済みアトラクション
+  attractions: Record<AttractionId, number>; // 各アトラクションを訪れた回数
 };
 
 // ゲーム待機室情報
 type Lobby = Record<GameSlot, { id: UserId; name: UserName; personality: PersonalityId } | null>;
+
+// 入場履歴情報
+type History = {
+  attraction: AttractionId;
+  personality: PersonalityId;
+  staff: StaffName;
+  visitedAt: DateTime;
+};
 
 ```
 
@@ -212,7 +222,6 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": null,
   "currentPersonality": null,
-  "attractions": null
 }
 ```
 

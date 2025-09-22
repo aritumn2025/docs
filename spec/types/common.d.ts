@@ -7,6 +7,7 @@ type UserName = string; // ユーザー名(重複可)
 type PersonalityId = string; // 性格ID
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // アトラクションID
 type StaffName = string; // スタッフ名
+type DateTime = string; // ISO 8601 拡張形式 (YYYY-MM-DDTHH:mm:ss.sssZ)
 
 // ゲーム結果管理システム
 type GameId = "coin" | "shooting"; // ゲームの種類(タイトル)ID
@@ -21,7 +22,7 @@ type User = {
   name: UserName;
   originalPersonalityId: PersonalityId;
   currentPersonalityId: PersonalityId;
-  attractions: AttractionId[];
+  attractions: Record<AttractionId, number>;
 };
 
 // ゲーム待機室情報
@@ -30,16 +31,26 @@ type Lobby = Record<
   { id: UserId; name: UserName; personality: PersonalityId } | null
 >;
 
+// 入場履歴情報
+type History = {
+  attraction: AttractionId;
+  personality: PersonalityId;
+  staff: StaffName;
+  visitedAt: DateTime;
+};
+
 export type {
   UserId,
   UserName,
   PersonalityId,
   AttractionId,
   StaffName,
+  DateTime,
   GameId,
   GamePlayId,
   GameSlot,
   GameScore,
   User,
   Lobby,
+  History,
 };

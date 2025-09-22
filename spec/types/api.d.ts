@@ -1,10 +1,12 @@
 /* OpenAPIで定義されているJSONスキーマに基づく型定義 */
 import type {
   AttractionId,
+  DateTime,
   GameId,
   GamePlayId,
   GameScore,
   GameSlot,
+  History,
   Lobby,
   PersonalityId,
   StaffName,
@@ -28,7 +30,7 @@ type PostUserRequest = {
 type PostUserResponse = User;
 
 // UPDATE /api/user/{user_id}
-type UpdateUserRequest = Nullable<User>;
+type UpdateUserRequest = Nullable<Omit<User, "attractions">>;
 
 type UpdateUserResponse = User;
 
@@ -45,12 +47,7 @@ type DeleteUserResponse = User;
 // GET /api/user/{user_id}/history
 type GetUserHistoryResponse = {
   userId: UserId;
-  history: {
-    attraction: AttractionId;
-    personality: PersonalityId;
-    staffName: StaffName;
-    visitedAt: string;
-  }[];
+  history: History[];
 };
 
 // 入出場管理システム関連API
@@ -73,7 +70,7 @@ type GetEntryAttractionResponse = {
     id: UserId;
     name: UserName;
     personality: PersonalityId;
-    visitedAt: string;
+    visitedAt: DateTime;
   }[];
 };
 
@@ -116,7 +113,6 @@ type DeleteGamesLobbyResponse = {
 // ゲーム結果管理システム関連API
 
 // POST /api/games/result/{game_id}
-// ゲームシステム用API。PersonaGoのフロントでは使わない。
 type PostGamesResultRequest = {
   startAt: string;
   results: Record<
@@ -139,7 +135,7 @@ type GetGamesResultPlayerResponse = {
     slot: GameSlot;
     score: GameScore;
     ranking: number;
-    playedAt: string;
+    playedAt: DateTime;
     PlayersCount: number;
   }[];
 };
