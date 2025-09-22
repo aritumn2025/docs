@@ -29,6 +29,14 @@ type User = {
 // ゲーム待機室情報
 type Lobby = Record<GameSlot, { id: UserId; name: UserName; personality: PersonalityId } | null>;
 
+// 入場履歴情報
+type History = {
+  attraction: AttractionId;
+  personality: PersonalityId;
+  staff: StaffName;
+  visitedAt: DateTime;
+};
+
 ```
 
 `StaffName`について: スタッフ名は人間が識別するためのもので、システム内で一意である必要はない。

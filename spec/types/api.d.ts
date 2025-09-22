@@ -6,6 +6,7 @@ import type {
   GamePlayId,
   GameScore,
   GameSlot,
+  History,
   Lobby,
   PersonalityId,
   StaffName,
@@ -46,12 +47,7 @@ type DeleteUserResponse = User;
 // GET /api/user/{user_id}/history
 type GetUserHistoryResponse = {
   userId: UserId;
-  history: {
-    attraction: AttractionId;
-    personality: PersonalityId;
-    staffName: StaffName;
-    visitedAt: DateTime;
-  }[];
+  history: History[];
 };
 
 // 入出場管理システム関連API
