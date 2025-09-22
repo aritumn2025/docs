@@ -7,6 +7,7 @@ type UserName = string; // ユーザー名(重複可)
 type PersonalityId = string; // 性格ID
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // アトラクションID
 type StaffName = string; // スタッフ名
+type DateTime = string; // ISO 8601 拡張形式 (YYYY-MM-DDTHH:mm:ss.sssZ)
 
 // ゲーム結果管理システム
 type GameId = "coin" | "shooting"; // ゲームの種類(タイトル)ID
@@ -36,6 +37,7 @@ export type {
   PersonalityId,
   AttractionId,
   StaffName,
+  DateTime,
   GameId,
   GamePlayId,
   GameSlot,
