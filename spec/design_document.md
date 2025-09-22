@@ -23,7 +23,7 @@ type User = {
   name: UserName; // ユーザー名
   originalPersonality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
   currentPersonality: PersonalityId; // 現在の性格ID
-  attractions: AttractionId[]; // 体験済みアトラクション
+  attractions: Record<AttractionId, number>; // 各アトラクションを訪れた回数
 };
 
 // ゲーム待機室情報
