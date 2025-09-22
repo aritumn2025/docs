@@ -22,7 +22,7 @@ type User = {
   name: UserName;
   originalPersonalityId: PersonalityId;
   currentPersonalityId: PersonalityId;
-  attractions: AttractionId[];
+  attractions: Record<AttractionId, number>;
 };
 
 // ゲーム待機室情報
