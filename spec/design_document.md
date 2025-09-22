@@ -214,7 +214,6 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": null,
   "currentPersonality": null,
-  "attractions": null
 }
 ```
 
