@@ -9,6 +9,8 @@ type UserName = string; // ユーザー名（重複可）
 type PersonalityId = string; // 性格ID
 type AttractionId = "mbti" | "picture" | "games" | "battle" | "prize"; // 出し物ID(性格診断, 景品も含む)
 type StaffName = string; // QRコードを読み取ったスタッフの名前（重複可）
+type DateTime = string; // ISO 8601 拡張形式 (YYYY-MM-DDTHH:mm:ss.sssZ)
+
 type GameId = "coin" | "shooting"; // ゲームの種類(タイトル)ID
 type GamePlayId = number; // ゲームプレイのID(同じGameId内で一意)
 type GameSlot = "1" | "2" | "3" | "4"; // ゲームのスロット番号(1P, 2P, 3P, 4P)
