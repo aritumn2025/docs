@@ -20,8 +20,8 @@ type GameScore = number; // ゲームのスコア
 type User = {
   id: UserId;
   name: UserName;
-  originalPersonalityId: PersonalityId;
-  currentPersonalityId: PersonalityId;
+  originalPersonality: PersonalityId;
+  currentPersonality: PersonalityId;
   attractions: Record<AttractionId, number>;
 };
 
