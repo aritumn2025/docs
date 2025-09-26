@@ -1,7 +1,6 @@
 /* OpenAPIで定義されているJSONスキーマに基づく型定義 */
 import type {
   AttractionId,
-  DateTime,
   GameId,
   GameLobby,
   GamePlayId,
