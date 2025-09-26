@@ -1,18 +1,20 @@
 /* OpenAPIで定義されているJSONスキーマに基づく型定義 */
 import type {
   AttractionId,
-  DateTime,
   GameId,
+  GameLobby,
   GamePlayId,
+  GameRankingEntry,
+  GameResultEntry,
   GameScore,
   GameSlot,
-  History,
-  Lobby,
+  HistoryEntry,
   PersonalityId,
   StaffName,
   User,
   UserId,
   UserName,
+  Visitor,
 } from "./common";
 import type Nullable from "./utils";
 
@@ -47,7 +49,7 @@ type DeleteUserResponse = User;
 // GET /api/user/{user_id}/history
 type GetUserHistoryResponse = {
   userId: UserId;
-  history: History[];
+  history: HistoryEntry;
 };
 
 // 入出場管理システム関連API
@@ -66,12 +68,7 @@ type GetEntryAttractionResponse = {
   attraction: AttractionId;
   limit: number;
   visitorsCount: number;
-  visitors: {
-    id: UserId;
-    name: UserName;
-    personality: PersonalityId;
-    visitedAt: DateTime;
-  }[];
+  visitors: Visitor[];
 };
 
 // POST /api/entry/attraction/{attraction_id}/visit
@@ -90,7 +87,7 @@ type PostEntryAttractionVisitResponse = {
 // GET /api/games/lobby/{game_id}
 type GetGamesLobbyResponse = {
   gameId: GameId;
-  lobby: Lobby;
+  lobby: GameLobby;
 };
 
 // POST /api/games/lobby/{game_id}
@@ -101,13 +98,13 @@ type PostGamesLobbyRequest = {
 
 type PostGamesLobbyResponse = {
   gameId: GameId;
-  lobby: Lobby;
+  lobby: GameLobby;
 };
 
 // DELETE /api/games/lobby/{game_id}
 type DeleteGamesLobbyResponse = {
   gameId: GameId;
-  lobby: Lobby;
+  lobby: GameLobby;
 };
 
 // ゲーム結果管理システム関連API
@@ -129,15 +126,7 @@ type PostGamesResultResponse = {
 // GET /api/games/result/player/{user_id}
 type GetGamesResultPlayerResponse = {
   userId: UserId;
-  results: {
-    gameId: GameId;
-    playId: GamePlayId;
-    slot: GameSlot;
-    score: GameScore;
-    ranking: number;
-    playedAt: DateTime;
-    PlayersCount: number;
-  }[];
+  results: GameResultEntry[];
 };
 
 // GET /api/games/result/summary/{game_id}?limit={limit}
@@ -152,12 +141,7 @@ type GetGamesResultSummaryResponse = {
     max: number;
     min: number;
   };
-  ranking: {
-    rank: number;
-    name: UserName;
-    personality: PersonalityId;
-    score: GameScore;
-  }[];
+  ranking: GameRankingEntry[];
 };
 
 export type {

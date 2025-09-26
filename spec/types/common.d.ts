@@ -25,18 +25,46 @@ type User = {
   attractions: Record<AttractionId, number>;
 };
 
-// ゲーム待機室情報
-type Lobby = Record<
-  GameSlot,
-  { id: UserId; name: UserName; personality: PersonalityId } | null
->;
+// 入場者情報
+// Userはエンドユーザー用(/api/user/...), Visitorはスタッフ用(/api/entry/...)で使い分け
+type Visitor = {
+  id: UserId;
+  name: UserName;
+  personality: PersonalityId;
+  visitedAt: DateTime;
+};
 
 // 入場履歴情報
-type History = {
+type HistoryEntry = {
   attraction: AttractionId;
   personality: PersonalityId;
   staff: StaffName;
   visitedAt: DateTime;
+};
+
+// ゲーム待機室情報
+type GameLobby = Record<
+  GameSlot,
+  { id: UserId; name: UserName; personality: PersonalityId } | null
+>;
+
+// ゲーム結果情報
+type GameResultEntry = {
+  gameId: GameId;
+  playId: GamePlayId;
+  slot: GameSlot;
+  score: GameScore;
+  ranking: number;
+  playedAt: DateTime;
+  PlayersCount: number;
+};
+
+// ゲームランキング上位者情報
+type GameRankingEntry = {
+  rank: number;
+  name: UserName;
+  personality: PersonalityId;
+  score: GameScore;
 };
 
 export type {
@@ -51,6 +79,9 @@ export type {
   GameSlot,
   GameScore,
   User,
-  Lobby,
-  History,
+  Visitor,
+  HistoryEntry,
+  GameLobby,
+  GameResultEntry,
+  GameRankingEntry,
 };

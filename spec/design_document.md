@@ -26,15 +26,37 @@ type User = {
   attractions: Record<AttractionId, number>; // 各アトラクションを訪れた回数
 };
 
-// ゲーム待機室情報
-type Lobby = Record<GameSlot, { id: UserId; name: UserName; personality: PersonalityId } | null>;
-
 // 入場履歴情報
-type History = {
+type HistoryEntry = {
   attraction: AttractionId;
   personality: PersonalityId;
   staff: StaffName;
   visitedAt: DateTime;
+};
+
+// ゲーム待機室情報
+type GameLobby = Record<
+  GameSlot,
+  { id: UserId; name: UserName; personality: PersonalityId } | null
+>;
+
+// ゲーム結果情報
+type GameResultEntry = {
+  gameId: GameId;
+  playId: GamePlayId;
+  slot: GameSlot;
+  score: GameScore;
+  ranking: number;
+  playedAt: DateTime;
+  PlayersCount: number;
+};
+
+// ゲームランキング上位者情報
+type GameRankingEntry = {
+  rank: number;
+  name: UserName;
+  personality: PersonalityId;
+  score: GameScore;
 };
 
 ```
@@ -115,7 +137,7 @@ GamePlays (
 GameResults (
   id SERIAL PRIMARY KEY, -- リザルトID
   play_id INT NOT NULL REFERENCES GamePlays(play_id), -- プレイID(GamePlayId)
-  user_name SMALLINT NOT NULL CHECK (user_name BETWEEN 1 AND 4), -- スロット番号(Gameuser_name)
+  slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(GameSlot)
   user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   user_personality SMALLINT NOT NULL, -- プレイ時の性格ID(PersonalityId)
   score INT NOT NULL, -- スコア(GameScore)
