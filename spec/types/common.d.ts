@@ -59,6 +59,14 @@ type GameResult = {
   PlayersCount: number;
 };
 
+// ゲームランキング上位者情報
+type GameRankingEntry = {
+  rank: number;
+  name: UserName;
+  personality: PersonalityId;
+  score: GameScore;
+};
+
 export type {
   UserId,
   UserName,
@@ -75,4 +83,5 @@ export type {
   History,
   Lobby,
   GameResult,
+  GameRankingEntry,
 };

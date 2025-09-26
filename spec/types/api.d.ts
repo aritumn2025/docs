@@ -4,6 +4,7 @@ import type {
   DateTime,
   GameId,
   GamePlayId,
+  GameRankingEntry,
   GameResult,
   GameScore,
   GameSlot,
@@ -141,12 +142,7 @@ type GetGamesResultSummaryResponse = {
     max: number;
     min: number;
   };
-  ranking: {
-    rank: number;
-    name: UserName;
-    personality: PersonalityId;
-    score: GameScore;
-  }[];
+  ranking: GameRankingEntry[];
 };
 
 export type {
