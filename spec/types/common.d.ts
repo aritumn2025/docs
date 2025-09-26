@@ -33,6 +33,15 @@ type History = {
   visitedAt: DateTime;
 };
 
+// 入場者情報
+// Userはエンドユーザー用(/api/user/...), Visitorはスタッフ用(/api/entry/...)で使い分け
+type Visitor = {
+  id: UserId;
+  name: UserName;
+  personality: PersonalityId;
+  visitedAt: DateTime;
+};
+
 // ゲーム待機室情報
 type Lobby = Record<
   GameSlot,
@@ -62,6 +71,7 @@ export type {
   GameSlot,
   GameScore,
   User,
+  Visitor,
   History,
   Lobby,
   GameResult,

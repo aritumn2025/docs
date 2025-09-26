@@ -14,6 +14,7 @@ import type {
   User,
   UserId,
   UserName,
+  Visitor,
 } from "./common";
 import type Nullable from "./utils";
 
@@ -67,12 +68,7 @@ type GetEntryAttractionResponse = {
   attraction: AttractionId;
   limit: number;
   visitorsCount: number;
-  visitors: {
-    id: UserId;
-    name: UserName;
-    personality: PersonalityId;
-    visitedAt: DateTime;
-  }[];
+  visitors: Visitor[];
 };
 
 // POST /api/entry/attraction/{attraction_id}/visit
