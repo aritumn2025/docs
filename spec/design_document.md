@@ -60,6 +60,14 @@ type GameResult = {
   PlayersCount: number;
 };
 
+// ゲームランキング上位者情報
+type GameRankingEntry = {
+  rank: number;
+  name: UserName;
+  personality: PersonalityId;
+  score: GameScore;
+};
+
 ```
 
 `StaffName`について: スタッフ名は人間が識別するためのもので、システム内で一意である必要はない。
