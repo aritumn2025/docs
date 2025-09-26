@@ -3,13 +3,13 @@ import type {
   AttractionId,
   DateTime,
   GameId,
+  GameLobby,
   GamePlayId,
   GameRankingEntry,
   GameResultEntry,
   GameScore,
   GameSlot,
   HistoryEntry,
-  Lobby,
   PersonalityId,
   StaffName,
   User,
@@ -88,7 +88,7 @@ type PostEntryAttractionVisitResponse = {
 // GET /api/games/lobby/{game_id}
 type GetGamesLobbyResponse = {
   gameId: GameId;
-  lobby: Lobby;
+  lobby: GameLobby;
 };
 
 // POST /api/games/lobby/{game_id}
@@ -99,13 +99,13 @@ type PostGamesLobbyRequest = {
 
 type PostGamesLobbyResponse = {
   gameId: GameId;
-  lobby: Lobby;
+  lobby: GameLobby;
 };
 
 // DELETE /api/games/lobby/{game_id}
 type DeleteGamesLobbyResponse = {
   gameId: GameId;
-  lobby: Lobby;
+  lobby: GameLobby;
 };
 
 // ゲーム結果管理システム関連API
