@@ -4,6 +4,7 @@ import type {
   DateTime,
   GameId,
   GamePlayId,
+  GameResult,
   GameScore,
   GameSlot,
   History,
@@ -129,15 +130,7 @@ type PostGamesResultResponse = {
 // GET /api/games/result/player/{user_id}
 type GetGamesResultPlayerResponse = {
   userId: UserId;
-  results: {
-    gameId: GameId;
-    playId: GamePlayId;
-    slot: GameSlot;
-    score: GameScore;
-    ranking: number;
-    playedAt: DateTime;
-    PlayersCount: number;
-  }[];
+  results: GameResult[];
 };
 
 // GET /api/games/result/summary/{game_id}?limit={limit}

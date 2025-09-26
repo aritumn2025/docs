@@ -25,18 +25,29 @@ type User = {
   attractions: Record<AttractionId, number>;
 };
 
-// ゲーム待機室情報
-type Lobby = Record<
-  GameSlot,
-  { id: UserId; name: UserName; personality: PersonalityId } | null
->;
-
 // 入場履歴情報
 type History = {
   attraction: AttractionId;
   personality: PersonalityId;
   staff: StaffName;
   visitedAt: DateTime;
+};
+
+// ゲーム待機室情報
+type Lobby = Record<
+  GameSlot,
+  { id: UserId; name: UserName; personality: PersonalityId } | null
+>;
+
+// ゲーム結果情報
+type GameResult = {
+  gameId: GameId;
+  playId: GamePlayId;
+  slot: GameSlot;
+  score: GameScore;
+  ranking: number;
+  playedAt: DateTime;
+  PlayersCount: number;
 };
 
 export type {
@@ -51,6 +62,7 @@ export type {
   GameSlot,
   GameScore,
   User,
-  Lobby,
   History,
+  Lobby,
+  GameResult,
 };
