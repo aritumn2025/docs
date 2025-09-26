@@ -137,7 +137,7 @@ GamePlays (
 GameResults (
   id SERIAL PRIMARY KEY, -- リザルトID
   play_id INT NOT NULL REFERENCES GamePlays(play_id), -- プレイID(GamePlayId)
-  slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(Gameuser_name)
+  slot SMALLINT NOT NULL CHECK (slot BETWEEN 1 AND 4), -- スロット番号(GameSlot)
   user_id NOT NULL REFERENCES Users(id), -- ユーザーID(UserId)
   user_personality SMALLINT NOT NULL, -- プレイ時の性格ID(PersonalityId)
   score INT NOT NULL, -- スコア(GameScore)
