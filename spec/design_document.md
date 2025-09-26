@@ -35,7 +35,7 @@ type HistoryEntry = {
 };
 
 // ゲーム待機室情報
-type Lobby = Record<
+type GameLobby = Record<
   GameSlot,
   { id: UserId; name: UserName; personality: PersonalityId } | null
 >;
