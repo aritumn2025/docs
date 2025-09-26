@@ -5,10 +5,10 @@ import type {
   GameId,
   GamePlayId,
   GameRankingEntry,
-  GameResult,
+  GameResultEntry,
   GameScore,
   GameSlot,
-  History,
+  HistoryEntry,
   Lobby,
   PersonalityId,
   StaffName,
@@ -50,7 +50,7 @@ type DeleteUserResponse = User;
 // GET /api/user/{user_id}/history
 type GetUserHistoryResponse = {
   userId: UserId;
-  history: History[];
+  history: HistoryEntry;
 };
 
 // 入出場管理システム関連API
@@ -127,7 +127,7 @@ type PostGamesResultResponse = {
 // GET /api/games/result/player/{user_id}
 type GetGamesResultPlayerResponse = {
   userId: UserId;
-  results: GameResult[];
+  results: GameResultEntry[];
 };
 
 // GET /api/games/result/summary/{game_id}?limit={limit}

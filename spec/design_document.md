@@ -27,19 +27,10 @@ type User = {
 };
 
 // 入場履歴情報
-type History = {
+type HistoryEntry = {
   attraction: AttractionId;
   personality: PersonalityId;
   staff: StaffName;
-  visitedAt: DateTime;
-};
-
-// 入場者情報
-// Userはエンドユーザー用(/api/user/...), Visitorはスタッフ用(/api/entry/...)で使い分け
-type Visitor = {
-  id: UserId;
-  name: UserName;
-  personality: PersonalityId;
   visitedAt: DateTime;
 };
 
@@ -50,7 +41,7 @@ type Lobby = Record<
 >;
 
 // ゲーム結果情報
-type GameResult = {
+type GameResultEntry = {
   gameId: GameId;
   playId: GamePlayId;
   slot: GameSlot;
