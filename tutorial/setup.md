@@ -66,6 +66,7 @@ notepad ~/.ssh/id_rsa.pub
 
 ## GitHub に公開鍵を登録
 
+1. GitHub にログインします
 1. GitHub の設定画面を開きます
 1. 右上の自分のアイコンをクリックして、`Settings`を選択
 1. 左のメニューから`SSH and GPG keys`を選択
