@@ -82,4 +82,5 @@ notepad ~/.ssh/id_rsa.pub
 ```powershell
 # 例: 文化祭用のフォルダを作って移動しておく
 git clone git@github.com:aritumn2025/PersonaGo-backend.git
+git fetch --all
 ```
