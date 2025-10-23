@@ -23,7 +23,6 @@ type User = {
   name: UserName; // ユーザー名
   originalPersonality: PersonalityId; // オリジナル性格ID(最初に設定した性格)
   currentPersonality: PersonalityId; // 現在の性格ID
-  attractions: Record<AttractionId, number>; // 各アトラクションを訪れた回数
 };
 
 // 入場履歴情報
@@ -191,7 +190,6 @@ GameLobby (
   "name": "ほげほげ夫",
   "originalPersonality": "1",
   "currentPersonality": "2",
-  "attractions": ["games", "picture"]
 }
 ```
 
@@ -222,7 +220,6 @@ GameLobby (
   "name": "ほげほげ子",
   "originalPersonality": "2",
   "currentPersonality": "2",
-  "attractions": []
 }
 ```
 
@@ -255,7 +252,6 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": "2",
   "currentPersonality": "2",
-  "attractions": []
 }
 ```
 
@@ -284,7 +280,6 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": "1",
   "currentPersonality": "2",
-  "attractions": []
 }
 ```
 
@@ -302,7 +297,6 @@ GameLobby (
   "name": "ほげほげ美",
   "originalPersonality": "1",
   "currentPersonality": "2",
-  "attractions": []
 }
 ```
 
@@ -499,7 +493,6 @@ GameLobby (
     "id": "1tc5-4kh5",
     "name": "ほげほげ子",
     "personality": "2",
-    "attractions": []
   }
 }
 ```
