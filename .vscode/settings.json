@@ -1,0 +1,8 @@
+// install the Prettier extension from the marketplace
+// https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.resolveGlobalModules": false
+}
